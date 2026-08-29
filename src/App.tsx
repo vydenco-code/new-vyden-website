@@ -6,6 +6,7 @@
 import { useState, lazy, Suspense } from 'react';
 import { RouterProvider, useRouter } from './router';
 import { InquiryContext } from './inquiry';
+import PageTransition from './components/PageTransition';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloat from './components/WhatsAppFloat';
@@ -73,6 +74,7 @@ export default function App() {
 
   return (
     <RouterProvider>
+      <PageTransition />
       <InquiryContext.Provider value={openInquiry}>
         <div className="relative">
           <a

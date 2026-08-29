@@ -32,6 +32,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     if (pathname && pathname !== currentPath()) {
       window.history.pushState({}, '', to);
       setPath(currentPath());
+      window.dispatchEvent(new CustomEvent("route-change"));
       window.scrollTo(0, 0);
     }
 
