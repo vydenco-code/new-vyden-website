@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --color-navy: #1a2d4a;
+  --color-navy-mid: #12223a;
+  --color-navy-light: #1e3a5f;
+  --color-navy-deep: #0d1e33;
+  --color-gold: #c9a96e;
+  --color-gold-light: #e8c98a;
+  --color-off-white: #f5f3ef;
+  --color-wa-green: #25D366;
+
+  @keyframes blink-gold {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  --animate-blink-gold: blink-gold 0.5s ease-in-out infinite;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-off-white text-slate-800 antialiased overflow-x-hidden;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-deep;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold rounded-full;
+  }
+  
+  /* Selection Color */
+  ::selection {
+    @apply bg-gold/30 text-navy-deep;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gold/30 rounded-full;
+  }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    @apply bg-gold/60;
+  }
+}
+
+@layer utilities {
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+}
+
+/* Specific responsiveness for Hero heading between 1126px and 1330px */
+@media (min-width: 1126px) and (max-width: 1330px) {
+  .hero-heading {
+    font-size: 4.2rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+  }
+  
+  /* Ensure no overlap by giving more space to text column */
+  #home .grid {
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 4rem !important;
+  }
+}
