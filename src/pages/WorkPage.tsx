@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, MoveRight, Phone } from 'lucide-react';
 import gsap from 'gsap';
@@ -24,7 +24,9 @@ export default function WorkPage() {
   usePageMeta('Our Work', 'Case studies from Vyden Co. — social media growth, influencer campaigns, brand identity and marketing that drives real footfall.');
 
   // Desktop: pin the section and glide the track sideways. Mobile: native swipe.
-  useEffect(() => {
+  // Layout effect on purpose: unpin cleanup must restore the DOM BEFORE React
+  // removes nodes on unmount (passive cleanup runs too late → removeChild crash).
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;

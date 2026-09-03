@@ -3,8 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, lazy, Suspense } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { RouterProvider, useRouter } from './router';
 import { InquiryContext } from './inquiry';
 import PageTransition from './components/PageTransition';
@@ -31,6 +32,12 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function Routes() {
   const { path } = useRouter();
+
+  // Pinned sections change page height — recalc all triggers after each route renders.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, [path]);
 
   const workMatch = path.match(/^\/work\/([\w-]+)$/);
 

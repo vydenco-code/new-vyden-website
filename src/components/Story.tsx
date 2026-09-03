@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -17,7 +17,10 @@ const paragraphs = [
 export default function Story() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  // Layout effect on purpose: cleanup must unpin (restore DOM) BEFORE React
+  // removes nodes on unmount. A passive effect cleans up too late and React
+  // crashes with "removeChild ... not a child of this node".
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
