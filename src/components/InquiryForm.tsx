@@ -18,6 +18,10 @@ const services = [
   "Influencer Marketing",
   "Graphic Design & Creative",
   "Outdoor Advertising",
+  "Event Management & Activations",
+  "E-commerce Management",
+  "Email & SMS Marketing",
+  "Website Chatbots & AI",
   "Other"
 ];
 

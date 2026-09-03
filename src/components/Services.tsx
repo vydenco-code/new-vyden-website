@@ -4,6 +4,8 @@ import { ExternalLink, Fingerprint } from 'lucide-react';
 import { useInquiry } from '../inquiry';
 import { servicesData } from '../data/services';
 import type { Service } from '../data/services';
+import Spotlight from './Spotlight';
+import { useSpotlight } from '../hooks/useSpotlight';
 
 export default function Services() {
   const [activeServiceIndex, setActiveServiceIndex] = React.useState<number | null>(null);
@@ -53,6 +55,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, index, isActive, onToggle, onClose }: ServiceCardProps) {
   const openInquiry = useInquiry();
+  const { ref, pos, onMouseMove } = useSpotlight<HTMLDivElement>();
   const scrollRef = React.useRef<HTMLUListElement>(null);
   const [isUnlocked, setIsUnlocked] = React.useState(false);
   const holdTimerRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -113,14 +116,17 @@ function ServiceCard({ service, index, isActive, onToggle, onClose }: ServiceCar
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onClick={handleClick}
+      onMouseMove={onMouseMove}
       onMouseLeave={() => {
         setIsUnlocked(false);
         onClose();
       }}
-      className={`relative bg-white/5 border border-white/10 rounded-sm p-9 min-h-[260px] flex flex-col overflow-hidden transition-all hover:border-gold ${showDetails ? 'border-gold -translate-y-1' : ''}`}
+      className={`group relative bg-white/5 border border-white/10 rounded-sm p-9 min-h-[260px] flex flex-col overflow-hidden transition-all hover:border-gold ${showDetails ? 'border-gold -translate-y-1' : ''}`}
     >
       {/* Hover/Active Background */}
       <div className={`absolute inset-0 bg-gradient-to-br from-navy-mid to-navy-light transition-opacity duration-400 z-0 ${showDetails ? 'opacity-100' : 'opacity-0'}`}></div>
+      <div ref={ref} className="absolute inset-0 z-[1] pointer-events-none" aria-hidden="true"></div>
+      <Spotlight x={pos.x} y={pos.y} />
 
       {/* Preview Content */}
       <div className={`relative z-10 flex-grow flex flex-col items-center justify-center text-center transition-all duration-300 ${showDetails ? 'opacity-0 -translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>

@@ -4,9 +4,15 @@
  */
 
 import { useState, lazy, Suspense } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { RouterProvider, useRouter } from './router';
 import { InquiryContext } from './inquiry';
 import PageTransition from './components/PageTransition';
+import Preloader from './components/Preloader';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
+import StickyCTABar from './components/StickyCTABar';
+import ExitIntentPopup from './components/ExitIntentPopup';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloat from './components/WhatsAppFloat';
@@ -53,6 +59,7 @@ export default function App() {
   });
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const openLegalModal = (type: string) => {
     setLegalModal({ isOpen: true, type });
@@ -77,6 +84,10 @@ export default function App() {
       <PageTransition />
       <InquiryContext.Provider value={openInquiry}>
         <div className="relative">
+          <AnimatePresence>
+            {loading && <Preloader onDone={() => setLoading(false)} />}
+          </AnimatePresence>
+          <ScrollProgress />
           <a
             href="#main-content"
             className="fixed top-2 left-2 z-[200] -translate-y-24 bg-gold text-navy-deep px-5 py-3 rounded-sm text-[0.75rem] font-semibold uppercase tracking-widest shadow-lg transition-transform focus:translate-y-0"
@@ -95,8 +106,11 @@ export default function App() {
           </main>
           
           <Footer onOpenLegal={openLegalModal} />
-          
+
+          <BackToTop />
+          <StickyCTABar />
           <WhatsAppFloat />
+          <ExitIntentPopup />
 
           <LegalModal 
             isOpen={legalModal.isOpen} 

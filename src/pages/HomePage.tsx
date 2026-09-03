@@ -1,8 +1,11 @@
 import Hero from '../components/Hero';
+import Stats from '../components/Stats';
 import Story from '../components/Story';
 import ServicesPreview from '../components/ServicesPreview';
 import SoftwareTeaser from '../components/SoftwareTeaser';
 import ClientStrip from '../components/ClientStrip';
+import GoldDivider from '../components/GoldDivider';
+import ServiceFinder from '../components/ServiceFinder';
 import CTA from '../components/CTA';
 import { usePageMeta } from '../hooks/usePageMeta';
 
@@ -15,10 +18,14 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Stats />
       <Story />
       <ServicesPreview />
+      <GoldDivider dark />
       <SoftwareTeaser />
       <ClientStrip />
+      <ServiceFinder />
+      <GoldDivider />
       <CTA />
     </>
   );

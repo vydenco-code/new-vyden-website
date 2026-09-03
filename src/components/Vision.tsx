@@ -34,7 +34,7 @@ export default function Vision() {
         </h2>
         <div className="space-y-5 text-[0.98rem] text-slate-600 leading-relaxed font-light mb-9">
           <p>
-            At Vyden Co., our vision is to become a globally recognized leader in digital marketing and drop servicing, setting new benchmarks for innovation, performance, and scalability. We aim to expand our presence across continents, building a brand that represents trust, growth, and forward-thinking strategy on a global scale.
+            We are building Vyden Co. into a name ambitious brands trust for marketing that grows and software that fits how they work. We aim to expand our presence across continents, building a brand that represents trust, growth, and forward-thinking strategy on a global scale.
           </p>
           <p>
             By leveraging the power of artificial intelligence, automation, and data-driven systems, we strive to eliminate inefficiencies and create smarter, faster, and more impactful marketing ecosystems for every client we serve.

@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin, Globe } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ArrowUpRight, Phone, Mail, MapPin, Globe } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
 import { SITE, socialLinks } from '../data/site';
@@ -27,16 +28,44 @@ export default function Footer({ onOpenLegal }: FooterProps) {
     'WhatsApp automation in Kolkata',
     'social media marketing in Kolkata',
     'meta ads marketing in Kolkata',
-    'Google ads marketing in Kolkata'
+    'Google ads marketing in Kolkata',
+    'traditional marketing agency',
+    'outdoor advertising services',
+    'custom software development',
+    'website development services'
   ];
 
   return (
     <footer className="bg-[#070f1a] pt-20 pb-20 px-[5%] border-t border-gold/15">
+      {/* Giant CTA */}
+      <div className="max-w-7xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em] block mb-4">Have a project in mind?</span>
+          <button
+            onClick={() => openInquiry()}
+            className="group text-left font-serif text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.05] tracking-tight cursor-pointer"
+          >
+            Let's build it{' '}
+            <span className="italic text-gold inline-flex items-center gap-3">
+              together
+              <span className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/50 group-hover:bg-gold group-hover:text-navy-deep text-gold transition-all duration-300 group-hover:rotate-45">
+                <ArrowUpRight size={26} />
+              </span>
+            </span>
+          </button>
+        </motion.div>
+      </div>
+
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-14 mb-16">
         <div className="footer-brand">
           <span className="font-serif text-2xl font-bold text-white tracking-wider block mb-5">Vyden Co.</span>
           <p className="text-[0.83rem] text-white/40 leading-relaxed font-light mb-7 max-w-md">
-            Vyden Co. is a leading <strong className="text-gold font-normal">digital marketing agency in Kolkata</strong>, serving ambitious brands globally. We build brands, drive performance, and shape digital futures using AI-powered strategies and data-driven execution.
+            Vyden Co. is a <strong className="text-gold font-normal">full-service marketing & software solutions company in Kolkata</strong>, serving ambitious brands globally. We build brands, drive performance, and shape futures with digital, traditional and custom software execution.
           </p>
           <div className="flex gap-3">
             {socialLinks.map((social) => (
@@ -58,9 +87,11 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <h4 className="font-serif text-base font-semibold text-white mb-5 tracking-wide">Services</h4>
           <ul className="space-y-2.5">
             {[
-              'Social Media Marketing', 'Google Business & SEO', 'Branding & PR', 
-              'Podcast Production', 'WhatsApp Automation', 'Web & App Development', 
-              'Influencer Marketing', 'Graphic Design', 'Outdoor Advertising'
+              'Social Media Marketing', 'Google Business & SEO', 'Branding & PR',
+              'Podcast Production', 'WhatsApp Automation', 'Web & App Development',
+              'Influencer Marketing', 'Graphic Design', 'Outdoor Advertising',
+              'Event Management', 'E-commerce Management', 'Email & SMS Marketing',
+              'Website Chatbots & AI'
             ].map((item) => (
               <li key={item}>
                 <Link to="/services" className="text-[0.8rem] text-white/40 hover:text-gold transition-colors font-light">{item}</Link>

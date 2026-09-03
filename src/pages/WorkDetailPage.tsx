@@ -49,13 +49,13 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="hidden lg:block"
             >
-              <div className="relative bg-white h-64 flex items-center justify-center overflow-hidden rounded-sm shadow-2xl">
+              <div className="group relative bg-white h-64 flex items-center justify-center overflow-hidden rounded-sm shadow-2xl">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                 {project.logoUrl ? (
-                  <img 
-                    src={project.logoUrl} 
-                    alt={`${project.title} Client Logo`} 
-                    className="h-32 w-auto object-contain relative z-10"
+                  <img
+                    src={project.logoUrl}
+                    alt={`${project.title} Client Logo`}
+                    className="h-32 w-auto object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
                     decoding="async"
                     width="256"
                     height="128"

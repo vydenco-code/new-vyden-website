@@ -16,7 +16,10 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   const [path, setPath] = useState<string>(currentPath);
 
   useEffect(() => {
-    const onPop = () => setPath(currentPath());
+    const onPop = () => {
+      setPath(currentPath());
+      window.dispatchEvent(new CustomEvent("route-change", { detail: { path: currentPath() } }));
+    };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
@@ -32,7 +35,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     if (pathname && pathname !== currentPath()) {
       window.history.pushState({}, '', to);
       setPath(currentPath());
-      window.dispatchEvent(new CustomEvent("route-change"));
+      window.dispatchEvent(new CustomEvent("route-change", { detail: { path: currentPath() } }));
       window.scrollTo(0, 0);
     }
 

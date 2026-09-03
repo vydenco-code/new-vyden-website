@@ -29,14 +29,21 @@
   }
   
   /* Custom Scrollbar */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #c9a96e #0d1e33;
+  }
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
     @apply bg-navy-deep;
   }
   ::-webkit-scrollbar-thumb {
     @apply bg-gold rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold-light;
   }
   
   /* Selection Color */
@@ -74,8 +81,8 @@
 /* Specific responsiveness for Hero heading between 1126px and 1330px */
 @media (min-width: 1126px) and (max-width: 1330px) {
   .hero-heading {
-    font-size: 4.2rem !important;
-    line-height: 1.1 !important;
+    font-size: 4.5rem !important;
+    line-height: 1.08 !important;
     letter-spacing: -0.02em !important;
   }
   

@@ -118,5 +118,53 @@ export const servicesData: Service[] = [
       'Print Media (Newspaper Ads & Inserts)',
       'Point of Sale (Lolipops, Flenges, Posters, Danglers & Standees)'
     ]
+  },
+  {
+    title: 'Event Management & Activations',
+    description:
+      'Store launches, corporate events and on-ground brand activations planned and executed end to end.',
+    details: [
+      'Store & Product Launch Events',
+      'Corporate Events and Brand Activations',
+      'Experiential Campaigns and Roadshows',
+      'Vendor, Venue and Logistics Management',
+      'Event Promotion Across Digital and Print'
+    ]
+  },
+  {
+    title: 'E-commerce Management',
+    description:
+      'Amazon and Flipkart storefronts that rank, convert and grow — built for retail and D2C brands.',
+    details: [
+      'Marketplace Listing Setup and Optimization',
+      'Product Content, Images and A+ Pages',
+      'Amazon & Flipkart Ads Management',
+      'Pricing, Review and Rating Strategy',
+      'Sales Reporting and Growth Planning'
+    ]
+  },
+  {
+    title: 'Email & SMS Marketing',
+    description:
+      'Direct, high-ROI campaigns that keep customers coming back — paired with your WhatsApp flows.',
+    details: [
+      'Bulk Email Campaign Design and Sending',
+      'Bulk SMS Campaigns and DLT Support',
+      'Automated Drip and Follow-up Sequences',
+      'Audience Segmentation and Targeting',
+      'Open, Click and Conversion Tracking'
+    ]
+  },
+  {
+    title: 'Website Chatbots & AI',
+    description:
+      'AI assistants on your website that answer questions, capture leads and book appointments around the clock.',
+    details: [
+      'Custom Website Chatbot Development',
+      'AI-Powered Answers from Your Business Data',
+      'Lead Capture and CRM Integration',
+      'Appointment Booking and Support Flows',
+      'Chat Analytics and Continuous Improvement'
+    ]
   }
 ];

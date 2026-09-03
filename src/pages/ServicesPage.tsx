@@ -1,5 +1,7 @@
 import Services from '../components/Services';
 import CTA from '../components/CTA';
+import FAQAccordion from '../components/FAQAccordion';
+import { serviceFAQs } from '../data/faqs';
 import PageHeader from '../components/PageHeader';
 import { usePageMeta } from '../hooks/usePageMeta';
 
@@ -15,6 +17,7 @@ export default function ServicesPage() {
       />
       <Services />
       <CTA />
+      <FAQAccordion faqs={serviceFAQs} title="Quick Answers" />
     </>
   );
 }

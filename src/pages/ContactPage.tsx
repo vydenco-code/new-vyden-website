@@ -2,6 +2,8 @@ import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import WhatsAppIcon from '../components/icons/WhatsAppIcon';
 import InquiryForm from '../components/InquiryForm';
 import PageHeader from '../components/PageHeader';
+import FAQAccordion from '../components/FAQAccordion';
+import { generalFAQs } from '../data/faqs';
 import { SITE, socialLinks } from '../data/site';
 import { usePageMeta } from '../hooks/usePageMeta';
 
@@ -86,6 +88,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <FAQAccordion faqs={generalFAQs} title="Questions You Might Have" />
     </>
   );
 }
