@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { Phone } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
-import HeroParticles from './HeroParticles';
 import HeroTicker from './HeroTicker';
 
 const services = [
@@ -37,19 +36,18 @@ export default function Hero() {
     <section id="home" ref={sectionRef} className="relative min-h-[100dvh] flex items-center px-[5%] pt-28 pb-16 overflow-hidden bg-navy-deep">
       {/* Background Elements */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/95 to-navy-mid/20"></div>
-        <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(rgba(201,169,110,1)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
-        <HeroParticles />
-        {/* Soft floating glows */}
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-deep via-navy-deep to-navy-mid"></div>
+        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(201,169,110,1)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+        {/* Soft floating glows — navy shades only */}
         <motion.div
           aria-hidden="true"
-          className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-gold/10 blur-[140px]"
+          className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-navy-light/25 blur-[140px]"
           animate={{ y: [0, -24, 0], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           aria-hidden="true"
-          className="absolute bottom-[-120px] left-[-80px] w-[380px] h-[380px] rounded-full bg-navy-light/60 blur-[120px]"
+          className="absolute bottom-[-120px] left-[-80px] w-[380px] h-[380px] rounded-full bg-navy-mid/80 blur-[120px]"
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -139,7 +137,7 @@ export default function Hero() {
               <Link 
                 key={idx} 
                 to="/services"
-                className="bg-white/5 border border-white/10 backdrop-blur-sm p-6 rounded-sm hover:border-gold/60 hover:shadow-[0_8px_30px_rgba(201,169,110,0.15)] transition-all group cursor-pointer"
+                className="bg-navy-mid/60 border border-white/10 backdrop-blur-sm p-6 rounded-sm hover:border-gold/60 hover:shadow-[0_8px_30px_rgba(201,169,110,0.15)] transition-all group cursor-pointer"
               >
                 <span className="text-gold/40 text-[0.6rem] uppercase tracking-widest mb-2 block group-hover:text-gold transition-colors">Vyden Co. Services</span>
                 <h3 className="font-serif text-xl text-white group-hover:text-gold transition-colors">{service}</h3>

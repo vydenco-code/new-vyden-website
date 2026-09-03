@@ -203,7 +203,7 @@ export default function ServiceFinder() {
       transition={{ duration: 0.35, delay: index * 0.07 }}
       onClick={() => pick(key, onPick)}
       onKeyDown={(e) => moveFocus(e, index, total)}
-      className={`group relative text-left p-6 pt-7 transition-all duration-200 cursor-pointer border outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#10315f] ${
+      className={`group relative text-left p-6 pt-7 transition-all duration-200 cursor-pointer border outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep ${
         flashKey === key
           ? 'bg-gold/25 border-gold scale-[1.02]'
           : 'bg-white/[0.03] border-white/25 hover:border-gold hover:bg-gold/5 hover:-translate-y-0.5'
@@ -242,7 +242,7 @@ export default function ServiceFinder() {
     <button
       onClick={() => setStep(target)}
       title={title}
-      className="inline-flex items-center gap-2 text-[0.72rem] font-mono text-gold/90 bg-gold/10 border border-dashed border-gold/40 px-4 py-1.5 hover:bg-gold/20 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#10315f]"
+      className="inline-flex items-center gap-2 text-[0.72rem] font-mono text-gold/90 bg-gold/10 border border-dashed border-gold/40 px-4 py-1.5 hover:bg-gold/20 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep"
     >
       <Check size={13} /> {label} <span className="text-gold/60 underline underline-offset-2">revise</span>
     </button>
@@ -251,14 +251,14 @@ export default function ServiceFinder() {
   const backBtn = (target: number) => (
     <button
       onClick={() => setStep(target)}
-      className="inline-flex items-center gap-2 text-[0.72rem] font-mono text-white/60 uppercase tracking-[0.15em] hover:text-gold transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#10315f]"
+      className="inline-flex items-center gap-2 text-[0.72rem] font-mono text-white/60 uppercase tracking-[0.15em] hover:text-gold transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep"
     >
       <ArrowLeft size={14} /> Back
     </button>
   );
 
   return (
-    <section className="relative py-24 px-[5%] overflow-hidden bg-[#10315f]">
+    <section className="relative py-24 px-[5%] overflow-hidden bg-navy-deep">
       {/* blueprint grids: fine + major */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:22px_22px]"></div>
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.09)_1px,transparent_1px)] bg-[size:110px_110px]"></div>
@@ -427,7 +427,7 @@ export default function ServiceFinder() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: 0.4 + i * 0.14 }}
                         onClick={() => openInquiry(service.name)}
-                        className="group w-full text-left border border-white/25 bg-white/[0.03] p-5 hover:border-gold hover:bg-gold/5 transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-[#10315f]"
+                        className="group w-full text-left border border-white/25 bg-white/[0.03] p-5 hover:border-gold hover:bg-gold/5 transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep"
                       >
                         <span className="flex items-center justify-between gap-3 mb-1.5">
                           <span className="font-mono text-[0.62rem] tracking-[0.2em] text-white/55">DETAIL {i + 1} · SPEC-{result.services.length - i}0{i + 1}</span>
@@ -508,7 +508,7 @@ export default function ServiceFinder() {
           </div>
 
           {/* live drawing log — the profile that builds itself */}
-          <aside className="bg-navy-deep/70 border border-white/25 p-6 backdrop-blur-[1px] lg:sticky lg:top-28">
+          <aside className="bg-navy-mid/70 border border-white/25 p-6 backdrop-blur-[1px] lg:sticky lg:top-28">
             <p className="font-mono text-[0.65rem] text-gold uppercase tracking-[0.25em] mb-1">Drawing log</p>
             <p className="font-mono text-[0.6rem] text-white/35 tracking-[0.2em] mb-5">REF {planNo}</p>
             <div className="space-y-4 font-mono text-[0.75rem]">
