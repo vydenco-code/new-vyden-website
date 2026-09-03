@@ -4,7 +4,6 @@ import Story from '../components/Story';
 import CapabilitiesIndex from '../components/CapabilitiesIndex';
 import SoftwareTeaser from '../components/SoftwareTeaser';
 import ClientStrip from '../components/ClientStrip';
-import Testimonials from '../components/Testimonials';
 import GoldDivider from '../components/GoldDivider';
 import ServiceFinder from '../components/ServiceFinder';
 import CTA from '../components/CTA';
@@ -25,7 +24,6 @@ export default function HomePage() {
       <GoldDivider dark />
       <SoftwareTeaser />
       <ClientStrip />
-      <Testimonials />
       <ServiceFinder />
       <GoldDivider />
       <CTA />
