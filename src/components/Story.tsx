@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const paragraphs = [
   'Vyden Co. was founded on a simple yet powerful idea — to turn a shared dream into a bold reality. What began as a vision among driven individuals has grown into a results-focused full-service marketing & software solutions company built for the modern world.',
-  'Rooted in Kolkata and shaped by an ever-evolving digital landscape, we are a team of young, passionate professionals who have lived and breathed digital from the very beginning. We don\u2019t just follow trends — we study them, understand them, and use them to create meaningful, measurable impact for every client we serve.',
+  'Rooted in India and shaped by an ever-evolving digital landscape, we are a team of young, passionate professionals who have lived and breathed digital from the very beginning. We don\u2019t just follow trends — we study them, understand them, and use them to create meaningful, measurable impact for every client we serve.',
   'Our approach is grounded in a deep understanding of algorithms, consumer behavior, and smart execution. Long before stepping into the industry, we immersed ourselves in the fundamentals of digital marketing — from SEO and content strategy to Meta and Google Ads and web design and development. Every solution we offer comes from real expertise, not guesswork.',
   'Vyden Co. is more than an agency. We are a team of individuals with complementary strengths, united by one goal: delivering results that move the needle. We take action, push boundaries, and constantly evolve — because standing still was never part of the plan.',
   'At our core, we stand by one belief — if you dare to grow, we dare to deliver.',

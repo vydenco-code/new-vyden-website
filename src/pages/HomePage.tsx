@@ -1,9 +1,10 @@
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import Story from '../components/Story';
-import ServicesPreview from '../components/ServicesPreview';
+import CapabilitiesIndex from '../components/CapabilitiesIndex';
 import SoftwareTeaser from '../components/SoftwareTeaser';
 import ClientStrip from '../components/ClientStrip';
+import Testimonials from '../components/Testimonials';
 import GoldDivider from '../components/GoldDivider';
 import ServiceFinder from '../components/ServiceFinder';
 import CTA from '../components/CTA';
@@ -20,10 +21,11 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <Story />
-      <ServicesPreview />
+      <CapabilitiesIndex />
       <GoldDivider dark />
       <SoftwareTeaser />
       <ClientStrip />
+      <Testimonials />
       <ServiceFinder />
       <GoldDivider />
       <CTA />

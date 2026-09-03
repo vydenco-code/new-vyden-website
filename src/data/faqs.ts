@@ -6,14 +6,14 @@ export interface FAQ {
 export const serviceFAQs: FAQ[] = [
   {
     question: "What makes Vyden Co. different from other agencies?",
-    answer: "We combine full-service digital marketing with custom software under one roof — so your strategy and tools are built to work together, not in silos. Based in Kolkata, serving brands globally."
+    answer: "We combine full-service digital marketing with custom software under one roof — so your strategy and tools are built to work together, not in silos. Based in India, serving brands worldwide."
   },
   {
     question: "How long does a typical campaign take?",
     answer: "Most campaigns launch within 2–4 weeks. Complex projects like full branding or custom software may take 6–12 weeks. We share a clear timeline before we start."
   },
   {
-    question: "Do you work with businesses outside Kolkata?",
+    question: "Do you work with businesses in other cities and countries?",
     answer: "Yes — we work with brands across India and globally. Everything is managed remotely with regular video calls, screen shares, and cloud tools."
   },
   {

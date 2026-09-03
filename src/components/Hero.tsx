@@ -51,6 +51,9 @@ export default function Hero() {
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
+        <span aria-hidden="true" className="absolute -bottom-10 right-0 font-serif font-bold text-[26vw] lg:text-[19rem] leading-none text-stroke-gold opacity-70 select-none pointer-events-none">
+          VYDEN
+        </span>
       </motion.div>
 
       <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.19fr_0.81fr] gap-8 lg:gap-12 items-center">

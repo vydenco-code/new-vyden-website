@@ -25,9 +25,14 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const navigate = useCallback((to: string) => {
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (t: unknown, o?: Record<string, unknown>) => void } }).__lenis;
+
     if (to.startsWith('#')) {
       const el = document.querySelector(to);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        if (lenis) lenis.scrollTo(el, { offset: -72 });
+        else el.scrollIntoView({ behavior: 'smooth' });
+      }
       return;
     }
 
@@ -36,12 +41,16 @@ export function RouterProvider({ children }: { children: ReactNode }) {
       window.history.pushState({}, '', to);
       setPath(currentPath());
       window.dispatchEvent(new CustomEvent("route-change", { detail: { path: currentPath() } }));
-      window.scrollTo(0, 0);
+      if (lenis) lenis.scrollTo(0, { immediate: true });
+      else window.scrollTo(0, 0);
     }
 
     if (hash) {
       setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(hash);
+        if (!el) return;
+        if (lenis) lenis.scrollTo(el, { offset: -72 });
+        else el.scrollIntoView({ behavior: 'smooth' });
       }, 120);
     }
   }, []);

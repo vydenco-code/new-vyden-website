@@ -11,8 +11,8 @@ export const SITE = {
   whatsappMessageUrl:
     'https://wa.me/919903799675?text=Hi%20Vyden%20Co.%2C%20I%20want%20to%20know%20more!',
   email: 'vyden.co@gmail.com',
-  location: 'Kolkata, West Bengal, India',
-  scope: 'Global Digital Agency',
+  location: 'India · Serving Worldwide',
+  scope: 'Marketing + Software, Worldwide',
   instagramUrl: 'https://www.instagram.com/vyden.co/',
   facebookUrl: 'https://www.facebook.com/profile.php?id=61583503198232',
   linkedinUrl: 'https://www.linkedin.com/company/vyden-co/',

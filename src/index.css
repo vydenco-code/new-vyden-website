@@ -22,7 +22,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Native smooth scroll OFF — Lenis owns scrolling (they fight otherwise). */
+    scroll-behavior: auto;
   }
   body {
     @apply font-sans bg-off-white text-slate-800 antialiased overflow-x-hidden;
@@ -64,6 +65,17 @@
   }
   .custom-scrollbar:hover::-webkit-scrollbar-thumb {
     @apply bg-gold/60;
+  }
+
+  /* Giant outlined display type (hero backdrop + footer sign-off) */
+  .text-stroke-gold {
+    -webkit-text-stroke: 1.5px rgba(201, 169, 110, 0.3);
+    color: transparent;
+  }
+  @media (min-width: 768px) {
+    .text-stroke-gold {
+      -webkit-text-stroke-width: 2px;
+    }
   }
 }
 

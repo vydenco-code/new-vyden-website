@@ -65,7 +65,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
         <div className="footer-brand">
           <span className="font-serif text-2xl font-bold text-white tracking-wider block mb-5">Vyden Co.</span>
           <p className="text-[0.83rem] text-white/40 leading-relaxed font-light mb-7 max-w-md">
-            Vyden Co. is a <strong className="text-gold font-normal">full-service marketing & software solutions company in Kolkata</strong>, serving ambitious brands globally. We build brands, drive performance, and shape futures with digital, traditional and custom software execution.
+            Vyden Co. is a <strong className="text-gold font-normal">full-service marketing & software solutions company</strong>, serving ambitious brands worldwide. We build brands, drive performance, and shape futures with digital, traditional and custom software execution.
           </p>
           <div className="flex gap-3">
             {socialLinks.map((social) => (
@@ -173,6 +173,13 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <span className="text-[0.68rem] text-white/20 tracking-widest flex items-center gap-1.5 uppercase leading-none">
             <span className="text-gold inline-flex items-center justify-center">✦</span> Built with Vision by Vyden Co.
           </span>
+        </div>
+      </div>
+
+      {/* Giant sign-off */}
+      <div className="max-w-7xl mx-auto overflow-hidden mt-14" aria-hidden="true">
+        <div className="font-serif font-bold text-[19vw] lg:text-[12rem] leading-[0.85] text-stroke-gold opacity-60 text-center select-none">
+          VYDEN CO.
         </div>
       </div>
       

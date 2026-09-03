@@ -5,6 +5,7 @@
 
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
+import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { RouterProvider, useRouter } from './router';
 import { InquiryContext } from './inquiry';
@@ -85,6 +86,33 @@ export default function App() {
     setIsInquiryOpen(false);
     setSelectedService('');
   };
+
+  // Lenis buttery smooth scroll, kept in sync with ScrollTrigger.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const lenis = new Lenis({ lerp: 0.11, autoRaf: true });
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Smooth-scroll in-page anchors through Lenis instead of native jump.
+    const onClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const hash = anchor.getAttribute('href');
+      if (!hash || hash.length < 2) return;
+      const el = document.querySelector(hash);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el as HTMLElement, { offset: -72 });
+    };
+    document.addEventListener('click', onClick);
+
+    return () => {
+      document.removeEventListener('click', onClick);
+      lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
+    };
+  }, []);
 
   return (
     <RouterProvider>
