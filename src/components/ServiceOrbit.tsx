@@ -192,6 +192,7 @@ export default function ServiceOrbit() {
               onFocus={() => setActive(i)}
               onClick={() => setActive(i)}
               aria-label={s.title}
+              data-cursor="EXPLORE"
               className="absolute left-0 top-0 w-[92px] h-[92px] sm:w-[104px] sm:h-[104px] rounded-full bg-navy-mid/85 backdrop-blur-sm border border-white/20 hover:border-gold flex flex-col items-center justify-center gap-1 transition-colors duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold will-change-transform"
             >
               <span className="font-mono text-[0.6rem] text-gold tracking-[0.2em]">{String(i + 1).padStart(2, '0')}</span>
@@ -225,6 +226,7 @@ export default function ServiceOrbit() {
               <div className="flex flex-wrap justify-center items-center gap-4">
                 <button
                   onClick={() => openInquiry(current.title)}
+                  data-cursor="START"
                   className="inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-3.5 rounded-sm text-[0.78rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
                 >
                   Explore {current.short} <ArrowRight size={15} />

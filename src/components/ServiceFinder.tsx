@@ -471,6 +471,7 @@ export default function ServiceFinder() {
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                     <button
                       onClick={() => openInquiry(result.services[0].name)}
+                      data-cursor="START"
                       className="inline-flex items-center gap-2.5 bg-gold text-navy-deep px-8 py-4 text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
                     >
                       <Stamp size={16} /> Commission This Build

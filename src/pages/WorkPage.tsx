@@ -108,6 +108,7 @@ export default function WorkPage() {
                 </p>
                 <button
                   onClick={() => openInquiry()}
+                  data-cursor="START"
                   className="relative inline-flex items-center justify-center gap-2 bg-navy-deep text-white px-7 py-3.5 rounded-sm text-[0.78rem] font-semibold uppercase tracking-[0.12em] hover:bg-navy-mid hover:-translate-y-0.5 transition-all cursor-pointer mb-3"
                 >
                   <Phone size={16} /> Start Your Story
@@ -150,7 +151,7 @@ function WorkCard({ project, index }: { project: Client; index: number }) {
       className="group relative w-[82vw] sm:w-[400px] lg:w-[420px] shrink-0 snap-center"
     >
       <Spotlight x={pos.x} y={pos.y} />
-      <Link to={`/work/${project.slug}`} className="block h-full bg-white/5 rounded-sm overflow-hidden transition-all hover:bg-white/10 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)]">
+      <Link to={`/work/${project.slug}`} data-cursor="VIEW" className="block h-full bg-white/5 rounded-sm overflow-hidden transition-all hover:bg-white/10 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)]">
         <div className="h-48 bg-white relative flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 

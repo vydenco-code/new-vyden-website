@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Mail, Phone } from 'lucide-react';
 import { useInquiry } from '../inquiry';
+import Magnetic from '../motion/Magnetic';
 
 export default function CTA() {
   const openInquiry = useInquiry();
@@ -32,20 +33,25 @@ export default function CTA() {
         </p>
         
         <div className="flex flex-wrap gap-4 justify-center">
-          <button 
-            onClick={() => openInquiry()}
-            className="inline-flex items-center gap-2.5 bg-navy-deep text-white px-8 py-4 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-navy-mid hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(13,30,51,0.3)] transition-all cursor-pointer"
-          >
-            <Phone size={18} />
-            Schedule a Callback
-          </button>
-          <a 
-            href="mailto:vyden.co@gmail.com" 
-            className="inline-flex items-center gap-2.5 bg-navy-deep text-white px-8 py-4 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-navy-mid hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(13,30,51,0.3)] transition-all"
-          >
-            <Mail size={18} />
-            Send Us an Email
-          </a>
+          <Magnetic className="inline-flex">
+            <button
+              onClick={() => openInquiry()}
+              data-cursor="START"
+              className="inline-flex items-center gap-2.5 bg-navy-deep text-white px-8 py-4 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-navy-mid hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(13,30,51,0.3)] transition-all cursor-pointer"
+            >
+              <Phone size={18} />
+              Schedule a Callback
+            </button>
+          </Magnetic>
+          <Magnetic className="inline-flex">
+            <a
+              href="mailto:vyden.co@gmail.com"
+              className="inline-flex items-center gap-2.5 bg-navy-deep text-white px-8 py-4 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-navy-mid hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(13,30,51,0.3)] transition-all"
+            >
+              <Mail size={18} />
+              Send Us an Email
+            </a>
+          </Magnetic>
         </div>
       </motion.div>
     </section>

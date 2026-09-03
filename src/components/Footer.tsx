@@ -48,6 +48,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em] block mb-4">Have a project in mind?</span>
           <button
             onClick={() => openInquiry()}
+            data-cursor="START"
             className="group text-left font-serif text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.05] tracking-tight cursor-pointer"
           >
             Let's build it{' '}

@@ -186,6 +186,7 @@ function ServiceCard({ service, index, isActive, onToggle, onClose }: ServiceCar
             e.stopPropagation();
             openInquiry(service.title);
           }}
+          data-cursor="START"
           className="mt-auto inline-flex items-center justify-center gap-2 bg-gold text-navy-deep py-2.5 rounded-sm text-[0.7rem] font-bold uppercase tracking-widest hover:bg-gold-light transition-colors cursor-pointer"
         >
           Inquire Now <ExternalLink size={12} />

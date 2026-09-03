@@ -29,7 +29,7 @@ export default function ClientStrip() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {clients.map((client, index) => (
           <RevealMask key={client.slug} index={index}>
-            <Link to={`/work/${client.slug}`} className="block group">
+            <Link to={`/work/${client.slug}`} data-cursor="VIEW" className="block group">
               <div className="relative bg-white h-32 flex items-center justify-center overflow-hidden border border-slate-100 group-hover:border-gold/60 transition-all group-hover:-translate-y-1 group-hover:shadow-[0_16px_40px_rgba(13,30,51,0.08)]">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                   {client.logoUrl ? (

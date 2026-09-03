@@ -4,6 +4,7 @@ import { Phone } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
 import HeroTicker from './HeroTicker';
+import Magnetic from '../motion/Magnetic';
 
 const services = [
   "Social Media Marketing",
@@ -102,14 +103,17 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="flex flex-wrap gap-4"
           >
-            <button 
-              onClick={() => openInquiry()}
-              className="group/btn relative overflow-hidden inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-3.5 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
-            >
-              <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden="true"></span>
-              <Phone size={18} className="relative z-10" />
-              <span className="relative z-10">Schedule a Callback</span>
-            </button>
+            <Magnetic className="inline-flex">
+              <button
+                onClick={() => openInquiry()}
+                data-cursor="START"
+                className="group/btn relative overflow-hidden inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-3.5 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
+              >
+                <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden="true"></span>
+                <Phone size={18} className="relative z-10" />
+                <span className="relative z-10">Schedule a Callback</span>
+              </button>
+            </Magnetic>
             <Link 
               to="/services" 
               className="inline-flex items-center gap-2.5 bg-transparent text-white border border-white/25 px-7 py-3.5 rounded-sm text-[0.8rem] font-medium uppercase tracking-[0.12em] hover:border-gold hover:text-gold hover:-translate-y-0.5 transition-all"
