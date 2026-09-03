@@ -1,7 +1,7 @@
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import Story from '../components/Story';
-import CapabilitiesIndex from '../components/CapabilitiesIndex';
+import ServiceOrbit from '../components/ServiceOrbit';
 import SoftwareTeaser from '../components/SoftwareTeaser';
 import ClientStrip from '../components/ClientStrip';
 import GoldDivider from '../components/GoldDivider';
@@ -20,7 +20,7 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <Story />
-      <CapabilitiesIndex />
+      <ServiceOrbit />
       <GoldDivider dark />
       <SoftwareTeaser />
       <ClientStrip />
