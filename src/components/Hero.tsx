@@ -5,6 +5,8 @@ import { Link } from '../router';
 import { useInquiry } from '../inquiry';
 import HeroTicker from './HeroTicker';
 import Magnetic from '../motion/Magnetic';
+import LivingV from './LivingV';
+import VelocityType from '../motion/VelocityType';
 
 const services = [
   "Social Media Marketing",
@@ -39,6 +41,7 @@ export default function Hero() {
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-navy-deep via-navy-deep to-navy-mid"></div>
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(201,169,110,1)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+        <LivingV progress={scrollYProgress} />
         {/* Soft floating glows — navy shades only */}
         <motion.div
           aria-hidden="true"
@@ -74,6 +77,7 @@ export default function Hero() {
             <span className="text-[0.72rem] font-medium text-gold uppercase tracking-[0.25em]">Vyden Your Horizons</span>
           </motion.div>
 
+          <VelocityType max={0.045}>
           <h1 className="hero-heading font-serif text-[10vw] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[3.5rem] xl:text-[4.8rem] 2xl:text-[5.6rem] whitespace-nowrap font-light text-white leading-[1.08] tracking-tight mb-6">
             <span className="block overflow-hidden pb-1">
               <motion.span className="block" {...lineReveal(0.35)}>We Build Brands.</motion.span>
@@ -87,6 +91,7 @@ export default function Hero() {
               <motion.span className="block" {...lineReveal(0.59)}>We Shape Futures.</motion.span>
             </span>
           </h1>
+          </VelocityType>
 
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
