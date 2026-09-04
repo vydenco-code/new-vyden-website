@@ -1,6 +1,7 @@
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import Story from '../components/Story';
+import BrandDNA from '../components/BrandDNA';
 import ServiceOrbit from '../components/ServiceOrbit';
 import SoftwareTeaser from '../components/SoftwareTeaser';
 import ClientStrip from '../components/ClientStrip';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <Story />
+      <BrandDNA />
       <ServiceOrbit />
       <GoldDivider dark />
       <SoftwareTeaser />
