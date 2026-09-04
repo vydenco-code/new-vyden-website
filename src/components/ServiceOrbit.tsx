@@ -7,13 +7,82 @@ import { servicesData } from '../data/services';
 
 // The original nine crafts, orbiting the mark. Drag to spin, hover to inspect.
 const SHORT = ['SOCIAL', 'SEO / MAPS', 'BRAND & PR', 'PODCAST', 'WHATSAPP', 'WEB & APP', 'CREATORS', 'DESIGN', 'OUTDOOR'];
+const MOTIFS = ['frames', 'grid', 'arcs', 'flow', 'flow', 'grid', 'frames', 'arcs', 'grid'] as const;
 const orbitServices = servicesData.slice(0, 9).map((s, i) => ({
   title: s.title,
   description: s.description,
   details: s.details.slice(0, 3),
   short: SHORT[i] ?? s.title.toUpperCase(),
+  motif: MOTIFS[i] ?? 'frames',
 }));
 const N = orbitServices.length;
+
+// Abstract environment geometry behind the readout — pure CSS/SVG linework,
+// one family per craft. No icons, no imagery.
+function MotifLayer({ kind }: { kind: (typeof MOTIFS)[number] }) {
+  return (
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={kind}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
+          <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
+            {kind === 'frames' && (
+              <g stroke="#c9a96e" strokeOpacity="0.28" fill="none" strokeWidth="1.5">
+                <rect x="60" y="40" width="150" height="140" />
+                <rect x="230" y="20" width="170" height="180" />
+                <rect x="420" y="55" width="120" height="110" />
+              </g>
+            )}
+            {kind === 'grid' && (
+              <g stroke="#ffffff" strokeOpacity="0.14" strokeWidth="1.5">
+                {[40, 85, 130, 175].map((y) => (
+                  <line key={y} x1="40" y1={y} x2="560" y2={y} />
+                ))}
+                {[120, 240, 360, 480].map((x) => (
+                  <line key={x} x1={x} y1="20" x2={x} y2="200" stroke="#c9a96e" strokeOpacity="0.22" />
+                ))}
+              </g>
+            )}
+            {kind === 'arcs' && (
+              <g stroke="#c9a96e" fill="none">
+                <ellipse cx="300" cy="230" rx="120" ry="120" strokeOpacity="0.3" strokeWidth="1.5" />
+                <ellipse cx="300" cy="230" rx="190" ry="190" strokeOpacity="0.18" strokeWidth="1.5" />
+                <ellipse cx="300" cy="230" rx="260" ry="260" strokeOpacity="0.1" strokeWidth="1.5" />
+              </g>
+            )}
+            {kind === 'flow' && (
+              <g fill="none" strokeWidth="1.5">
+                <motion.path
+                  d="M20 150 C 150 150, 150 70, 300 70 S 450 70, 580 70"
+                  stroke="#c9a96e"
+                  strokeOpacity="0.35"
+                  strokeDasharray="10 12"
+                  animate={{ strokeDashoffset: [0, -88] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.path
+                  d="M20 190 C 180 190, 180 120, 330 120 S 480 120, 580 120"
+                  stroke="#ffffff"
+                  strokeOpacity="0.16"
+                  strokeDasharray="6 14"
+                  animate={{ strokeDashoffset: [0, -80] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                />
+                <circle cx="300" cy="70" r="4" fill="#c9a96e" fillOpacity="0.6" />
+              </g>
+            )}
+          </svg>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function ServiceOrbit() {
   const openInquiry = useInquiry();
@@ -29,6 +98,7 @@ export default function ServiceOrbit() {
     lastX: 0,
     cursor: { x: -9999, y: -9999 },
     inside: false,
+    visible: true,
     speed: 0.0024,
     off: Array.from({ length: N }, () => ({ x: 0, y: 0 })),
     size: 0,
@@ -98,9 +168,27 @@ export default function ServiceOrbit() {
         S.vel *= 0.95;
       }
       place();
-      S.raf = requestAnimationFrame(tick);
+      if (S.visible) {
+        S.raf = requestAnimationFrame(tick);
+      }
     };
     S.raf = requestAnimationFrame(tick);
+
+    // Pause the loop entirely while the section is offscreen (perf rule).
+    const section = box.closest('section');
+    const vis = new IntersectionObserver(
+      ([entry]) => {
+        const was = S.visible;
+        S.visible = entry.isIntersecting;
+        if (S.visible && !was) {
+          cancelAnimationFrame(S.raf);
+          S.raf = requestAnimationFrame(tick);
+        }
+      },
+      { rootMargin: '120px' }
+    );
+    S.visible = true;
+    if (section) vis.observe(section);
 
     const onDown = (e: PointerEvent) => {
       S.dragging = true;
@@ -137,6 +225,7 @@ export default function ServiceOrbit() {
     return () => {
       cancelAnimationFrame(S.raf);
       ro.disconnect();
+      vis.disconnect();
       box.removeEventListener('pointerdown', onDown);
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerup', onUp);
@@ -166,7 +255,14 @@ export default function ServiceOrbit() {
         {/* Orbit field */}
         <div
           ref={boxRef}
-          className="relative mx-auto w-full max-w-[640px] h-[480px] sm:h-[540px] cursor-grab active:cursor-grabbing select-none"
+          role="listbox"
+          aria-label="Services orbit — use left and right arrow keys to browse"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowRight') setActive((a) => (a + 1) % N);
+            else if (e.key === 'ArrowLeft') setActive((a) => (a - 1 + N) % N);
+          }}
+          className="relative mx-auto w-full max-w-[640px] h-[480px] sm:h-[540px] cursor-grab active:cursor-grabbing select-none outline-none"
           style={{ touchAction: 'pan-y' }}
         >
           {/* orbit path */}
@@ -192,6 +288,8 @@ export default function ServiceOrbit() {
               onFocus={() => setActive(i)}
               onClick={() => setActive(i)}
               aria-label={s.title}
+              role="option"
+              aria-selected={active === i}
               data-cursor="EXPLORE"
               className="absolute left-0 top-0 w-[92px] h-[92px] sm:w-[104px] sm:h-[104px] rounded-full bg-navy-mid/85 backdrop-blur-sm border border-white/20 hover:border-gold flex flex-col items-center justify-center gap-1 transition-colors duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold will-change-transform"
             >
@@ -204,7 +302,9 @@ export default function ServiceOrbit() {
         </div>
 
         {/* Detail readout */}
-        <div className="max-w-3xl mx-auto text-center min-h-[240px] mt-4">
+        <div className="relative max-w-3xl mx-auto text-center min-h-[240px] mt-4 px-4 py-6" aria-live="polite">
+          <MotifLayer kind={current.motif} />
+          <div className="relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -238,6 +338,7 @@ export default function ServiceOrbit() {
             </motion.div>
           </AnimatePresence>
         </div>
+      </div>
       </div>
     </section>
   );
