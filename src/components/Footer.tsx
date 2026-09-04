@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight, Phone, Mail, MapPin, Globe } from 'lucide-react';
 import { Link } from '../router';
@@ -11,6 +12,24 @@ interface FooterProps {
 export default function Footer({ onOpenLegal }: FooterProps) {
   const openInquiry = useInquiry();
   const currentYear = new Date().getFullYear();
+  const [deepClicks, setDeepClicks] = useState(0);
+  const [deepMode, setDeepMode] = useState(false);
+
+  // Easter egg: five intentional taps on the sign-off wake DEEP MODE briefly.
+  const pokeDeep = () => {
+    if (deepMode) return;
+    const next = deepClicks + 1;
+    setDeepClicks(next);
+    if (next >= 5) {
+      setDeepClicks(0);
+      setDeepMode(true);
+      document.documentElement.classList.add('deep-mode');
+      setTimeout(() => {
+        setDeepMode(false);
+        document.documentElement.classList.remove('deep-mode');
+      }, 4000);
+    }
+  };
 
   const legalLinks = [
     { name: 'Privacy Policy' },
@@ -155,7 +174,13 @@ export default function Footer({ onOpenLegal }: FooterProps) {
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 text-center md:text-left">
         <div className="order-3 md:order-1 flex items-center h-full">
-          <p className="text-[0.75rem] text-white/25 font-light leading-none">© {currentYear} Vyden Co. All rights reserved. · India</p>
+          <p className="text-[0.75rem] text-white/25 font-light leading-none flex items-center gap-2">
+            © {currentYear} Vyden Co. All rights reserved. · India
+            <span className="inline-flex items-center gap-1.5 text-gold/70">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-blink-gold" aria-hidden="true"></span>
+              VYDEN / SYSTEM ONLINE
+            </span>
+          </p>
         </div>
         
         <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 order-1 md:order-2 h-full">
@@ -177,11 +202,17 @@ export default function Footer({ onOpenLegal }: FooterProps) {
         </div>
       </div>
 
-      {/* Giant sign-off */}
+      {/* Giant sign-off — five taps wake DEEP MODE */}
       <div className="max-w-7xl mx-auto overflow-hidden mt-14" aria-hidden="true">
-        <div className="font-serif font-bold text-[19vw] lg:text-[12rem] leading-[0.85] text-stroke-gold opacity-60 text-center select-none">
+        <div
+          onClick={pokeDeep}
+          className="font-serif font-bold text-[19vw] lg:text-[12rem] leading-[0.85] text-stroke-gold opacity-60 text-center select-none cursor-pointer"
+        >
           VYDEN CO.
         </div>
+        <p className={`text-center font-mono text-[0.62rem] text-gold tracking-[0.35em] mt-3 transition-opacity duration-500 ${deepMode ? 'opacity-100' : 'opacity-0'}`}>
+          VYDEN DEEP MODE — WIREFRAME EDITION
+        </p>
       </div>
       
       {/* Seamless SEO Keywords */}

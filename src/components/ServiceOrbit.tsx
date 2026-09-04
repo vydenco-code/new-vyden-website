@@ -236,7 +236,7 @@ export default function ServiceOrbit() {
   const current = orbitServices[active];
 
   return (
-    <section className="bg-navy-deep py-24 px-[5%] relative overflow-hidden">
+    <section id="orbit" className="bg-navy-deep py-24 px-[5%] relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.035] bg-[linear-gradient(rgba(201,169,110,1)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto">

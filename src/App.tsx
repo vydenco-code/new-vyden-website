@@ -12,6 +12,7 @@ import { InquiryContext } from './inquiry';
 import PageTransition from './components/PageTransition';
 import Preloader from './components/Preloader';
 import ScrollProgress from './components/ScrollProgress';
+import SectionProgress from './components/SectionProgress';
 import BackToTop from './components/BackToTop';
 import StickyCTABar from './components/StickyCTABar';
 import ExitIntentPopup from './components/ExitIntentPopup';
@@ -123,6 +124,7 @@ export default function App() {
             {loading && <Preloader onDone={() => setLoading(false)} />}
           </AnimatePresence>
           <ScrollProgress />
+          <SectionProgress />
           <a
             href="#main-content"
             className="fixed top-2 left-2 z-[200] -translate-y-24 bg-gold text-navy-deep px-5 py-3 rounded-sm text-[0.75rem] font-semibold uppercase tracking-widest shadow-lg transition-transform focus:translate-y-0"

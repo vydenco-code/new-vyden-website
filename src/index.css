@@ -77,6 +77,14 @@
       -webkit-text-stroke-width: 2px;
     }
   }
+
+  /* DEEP MODE easter egg: wireframe strokes ignite site-wide for a few seconds */
+  .deep-mode .text-stroke-gold {
+    -webkit-text-stroke-color: rgba(232, 201, 138, 0.95);
+  }
+  .deep-mode {
+    filter: saturate(1.15);
+  }
 }
 
 @layer utilities {

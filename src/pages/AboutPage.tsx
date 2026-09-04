@@ -1,5 +1,6 @@
 import Story from '../components/Story';
 import Vision from '../components/Vision';
+import HumanAI from '../components/HumanAI';
 import CTA from '../components/CTA';
 import PageHeader from '../components/PageHeader';
 import { usePageMeta } from '../hooks/usePageMeta';
@@ -15,6 +16,7 @@ export default function AboutPage() {
       />
       <Story />
       <Vision />
+      <HumanAI />
       <CTA />
     </>
   );

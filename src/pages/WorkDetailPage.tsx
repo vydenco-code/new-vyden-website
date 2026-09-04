@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Phone } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
-import { getClientBySlug } from '../data/clients';
+import { getClientBySlug, getPublishedClients } from '../data/clients';
 import SectionHeader from '../components/SectionHeader';
 import NotFoundPage from './NotFoundPage';
 import { usePageMeta } from '../hooks/usePageMeta';
@@ -10,6 +10,8 @@ import { usePageMeta } from '../hooks/usePageMeta';
 export default function WorkDetailPage({ slug }: { slug: string }) {
   const openInquiry = useInquiry();
   const project = getClientBySlug(slug);
+  const published = getPublishedClients();
+  const projectNo = published.findIndex((c) => c.slug === slug);
   usePageMeta(
     project ? `${project.title} — Case Study` : 'Case Study Not Found',
     project?.description
@@ -39,6 +41,9 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
               transition={{ duration: 0.7 }}
             >
               <span className="inline-block text-[0.68rem] font-semibold text-gold uppercase tracking-[0.22em] border border-gold/40 rounded-sm px-4 py-1.5 mb-6">{project.tag}</span>
+              <p className="font-mono text-[0.65rem] text-white/40 tracking-[0.3em] mb-4">
+                PROJECT {String(projectNo + 1).padStart(2, '0')} / {String(published.length).padStart(2, '0')} — CASE STUDY
+              </p>
               <h1 className="font-serif text-4xl md:text-6xl font-light text-white leading-tight tracking-tight mb-5">{project.title}</h1>
               <p className="text-lg text-white/65 leading-relaxed max-w-xl font-light">{project.description}</p>
             </motion.div>

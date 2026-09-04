@@ -58,11 +58,18 @@ export default function Stats() {
       <div className="max-w-6xl mx-auto">
         <div className="inline-flex items-center gap-3 mb-4">
           <div className="w-6 h-[1px] bg-gold"></div>
-          <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Vyden In Numbers</span>
+          <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Proof / Growth</span>
         </div>
-        <h2 className="font-serif text-3xl md:text-5xl font-normal text-navy-deep leading-tight tracking-tight mb-14">
+        <h2 className="font-serif text-3xl md:text-5xl font-normal text-navy-deep leading-tight tracking-tight mb-4">
           Proof, Not <em className="italic text-navy-mid not-italic">Promises.</em>
         </h2>
+        <div className="flex items-center gap-4 mb-14">
+          <span className="font-serif text-gold text-2xl font-bold leading-none" aria-hidden="true">V</span>
+          <span className="h-[1px] w-24 bg-gold/50" aria-hidden="true"></span>
+          <p className="text-[0.68rem] text-slate-400 uppercase tracking-[0.22em] font-medium">
+            Real figures from our services and client work
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
           {stats.map((stat, index) => (

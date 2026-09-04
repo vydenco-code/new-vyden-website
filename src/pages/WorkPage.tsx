@@ -1,5 +1,5 @@
-import { useLayoutEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'motion/react';
 import { ArrowRight, MoveRight, Phone } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,6 +23,13 @@ export default function WorkPage() {
   const openInquiry = useInquiry();
   usePageMeta('Our Work', 'Case studies from Vyden Co. — social media growth, influencer campaigns, brand identity and marketing that drives real footfall.');
 
+  // Floating logo preview chasing the cursor over card titles (desktop).
+  const [preview, setPreview] = useState<Client | null>(null);
+  const pmx = useMotionValue(0);
+  const pmy = useMotionValue(0);
+  const psx = useSpring(pmx, { stiffness: 260, damping: 28 });
+  const psy = useSpring(pmy, { stiffness: 260, damping: 28 });
+
   // Desktop: pin the section and glide the track sideways. Mobile: native swipe.
   // Layout effect on purpose: unpin cleanup must restore the DOM BEFORE React
   // removes nodes on unmount (passive cleanup runs too late → removeChild crash).
@@ -36,7 +43,7 @@ export default function WorkPage() {
     mm.add('(min-width: 1024px)', () => {
       const ctx = gsap.context(() => {
         const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
-        gsap.to(track, {
+        const tween = gsap.to(track, {
           x: () => -distance(),
           ease: 'none',
           scrollTrigger: {
@@ -54,6 +61,27 @@ export default function WorkPage() {
             },
           },
         });
+
+        // Cinematic layer: giant outline titles drift against the rail direction.
+        gsap.utils.toArray<HTMLElement>('.work-card').forEach((card) => {
+          const title = card.querySelector('.work-giant-title');
+          if (!title) return;
+          gsap.fromTo(
+            title,
+            { xPercent: 18 },
+            {
+              xPercent: -18,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: card,
+                containerAnimation: tween,
+                start: 'left right',
+                end: 'right left',
+                scrub: true,
+              },
+            }
+          );
+        });
       }, section);
       return () => ctx.revert();
     });
@@ -69,7 +97,14 @@ export default function WorkPage() {
         description="We partner with brands across industries to drive measurable growth, strengthen brand identity, and build high-impact marketing campaigns. Here's a closer look at that work."
       />
 
-      <section ref={sectionRef} className="bg-navy-mid py-24 overflow-hidden lg:min-h-screen lg:flex lg:flex-col lg:justify-center">
+      <section
+        ref={sectionRef}
+        onMouseMove={(e) => {
+          pmx.set(e.clientX);
+          pmy.set(e.clientY);
+        }}
+        className="bg-navy-mid py-24 overflow-hidden lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
+      >
         <div className="px-[5%] mb-10 flex items-end justify-between gap-6">
           <p className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">
             Selected Work <span className="text-white/30 normal-case tracking-normal font-light">— {clients.length} case studies</span>
@@ -83,7 +118,7 @@ export default function WorkPage() {
         <div className="overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div ref={trackRef} className="flex gap-6 w-max px-[5%] will-change-transform">
             {clients.map((project, index) => (
-              <WorkCard key={project.slug} project={project} index={index} />
+              <WorkCard key={project.slug} project={project} index={index} onPreview={setPreview} />
             ))}
             {/* End-of-rail inquiry panel */}
             <motion.div
@@ -132,12 +167,42 @@ export default function WorkPage() {
             <div ref={progressRef} className="h-full w-full bg-gold origin-left scale-x-0" />
           </div>
         </div>
+
+        {/* Floating logo preview following the cursor over titles (desktop) */}
+        <motion.div
+          aria-hidden="true"
+          style={{ x: psx, y: psy }}
+          className="pointer-events-none fixed top-0 left-0 z-40 hidden lg:block"
+        >
+          <div style={{ transform: 'translate(28px, -50%)' }}>
+            <AnimatePresence>
+              {preview && (
+                <motion.div
+                  key={preview.slug}
+                  initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 2 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  transition={{ duration: 0.22 }}
+                  className="w-64 bg-white rounded-sm p-6 shadow-[0_24px_60px_rgba(0,0,0,0.5)]"
+                >
+                  {preview.logoUrl ? (
+                    <img src={preview.logoUrl} alt="" aria-hidden="true" className="h-16 w-auto object-contain mb-3" loading="lazy" decoding="async" />
+                  ) : (
+                    <p className="font-serif text-xl font-bold text-navy-deep/30 uppercase mb-3">{preview.logo}</p>
+                  )}
+                  <p className="font-serif text-lg text-navy-deep leading-snug">{preview.title}</p>
+                  <p className="text-[0.62rem] text-gold font-semibold uppercase tracking-[0.2em] mt-1">{preview.tag}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </section>
     </>
   );
 }
 
-function WorkCard({ project, index }: { project: Client; index: number }) {
+function WorkCard({ project, index, onPreview }: { project: Client; index: number; onPreview: (c: Client | null) => void }) {
   const { ref, pos, onMouseMove } = useSpotlight<HTMLElement>();
 
   return (
@@ -148,18 +213,25 @@ function WorkCard({ project, index }: { project: Client; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index, 2) * 0.1 }}
-      className="group relative w-[82vw] sm:w-[400px] lg:w-[420px] shrink-0 snap-center"
+      className="work-card group relative w-[82vw] sm:w-[400px] lg:w-[420px] shrink-0 snap-center"
     >
+      <span
+        aria-hidden="true"
+        className="work-giant-title pointer-events-none select-none absolute -top-14 left-0 font-serif font-bold uppercase whitespace-nowrap text-7xl leading-none z-0"
+        style={{ WebkitTextStroke: '1px rgba(255,255,255,0.16)', color: 'transparent' }}
+      >
+        {project.title}
+      </span>
       <Spotlight x={pos.x} y={pos.y} />
-      <Link to={`/work/${project.slug}`} data-cursor="VIEW" className="block h-full bg-white/5 rounded-sm overflow-hidden transition-all hover:bg-white/10 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)]">
-        <div className="h-48 bg-white relative flex items-center justify-center overflow-hidden">
+      <Link to={`/work/${project.slug}`} data-cursor="VIEW" className="relative z-10 block h-full bg-white/5 rounded-sm overflow-hidden transition-all hover:bg-white/10 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)]">
+        <div className="h-48 group-hover:h-60 transition-all duration-500 bg-white relative flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
           {project.logoUrl ? (
             <img
               src={project.logoUrl}
               alt={`${project.title} Client Logo`}
-              className="h-24 w-auto object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
+              className="h-24 w-auto object-contain relative z-10 transition-transform duration-500 group-hover:scale-125"
               loading="lazy"
               decoding="async"
               width="200"
@@ -174,11 +246,19 @@ function WorkCard({ project, index }: { project: Client; index: number }) {
             </div>
           )}
 
+          {/* glare sweep on hover */}
+          <div aria-hidden="true" className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-gold/25 to-transparent z-10 pointer-events-none" />
           <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gold z-20"></div>
         </div>
         <div className="p-8">
           <span className="inline-block text-[0.65rem] font-semibold text-gold uppercase tracking-[0.2em] mb-3">{project.tag}</span>
-          <h3 className="font-serif text-2xl font-semibold text-white mb-2.5">{project.title}</h3>
+          <h3
+            className="font-serif text-2xl font-semibold text-white mb-2.5"
+            onMouseEnter={() => onPreview(project)}
+            onMouseLeave={() => onPreview(null)}
+          >
+            {project.title}
+          </h3>
           <p className="text-[0.82rem] text-white/50 leading-relaxed mb-5 font-light">{project.description}</p>
           <ul className="space-y-2 mb-6">
             {project.results.slice(0, 4).map((result, i) => (

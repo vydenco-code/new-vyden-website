@@ -45,7 +45,7 @@ export default function BrandDNA() {
   }, []);
 
   return (
-    <section className="bg-off-white py-16 md:py-20 px-[5%]">
+    <section className="bg-off-white py-16 md:py-20 px-[5%]" id="dna">
       <p className="text-center text-[0.7rem] font-medium text-gold uppercase tracking-[0.3em]">
         Brand DNA — what makes a brand grow?
       </p>

@@ -258,7 +258,7 @@ export default function ServiceFinder() {
   );
 
   return (
-    <section className="relative py-24 px-[5%] overflow-hidden bg-navy-deep">
+    <section id="finder" className="relative py-24 px-[5%] overflow-hidden bg-navy-deep">
       {/* blueprint grids: fine + major */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:22px_22px]"></div>
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.09)_1px,transparent_1px)] bg-[size:110px_110px]"></div>

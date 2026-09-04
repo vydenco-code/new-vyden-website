@@ -36,10 +36,12 @@ function labelFor(path: string): string {
 export default function PageTransition() {
   const elRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
+  const vRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const el = elRef.current;
     const label = labelRef.current;
+    const v = vRef.current;
     if (!el || !label) return;
 
     const handler = (e: Event) => {
@@ -49,13 +51,18 @@ export default function PageTransition() {
       const reveal = axis === "y" ? { scaleY: 0 } : { scaleX: 0 };
       label.textContent = labelFor(path);
 
-      gsap.killTweensOf([el, label]);
-      gsap.timeline()
+      gsap.killTweensOf([el, label, v]);
+      const tl = gsap.timeline()
         .set(el, { transformOrigin: coverOrigin, scaleX: axis === "x" ? 0 : 1, scaleY: axis === "y" ? 0 : 1 })
         .set(label, { opacity: 0, y: 18 })
         .to(el, { ...cover, duration: 0.32, ease: "expo.inOut" })
-        .to(label, { opacity: 1, y: 0, duration: 0.28, ease: "expo.out" }, 0.18)
-        .to(label, { opacity: 0, y: -12, duration: 0.2, ease: "expo.in" }, 0.52)
+        .to(label, { opacity: 1, y: 0, duration: 0.28, ease: "expo.out" }, 0.18);
+      // V-mask beat: the mark blows up to fill the screen mid-wipe.
+      if (v) {
+        tl.fromTo(v, { scale: 1, opacity: 0.7 }, { scale: 16, opacity: 1, duration: 0.32, ease: "expo.in" }, 0.22)
+          .set(v, { scale: 1, opacity: 0.7 }, 0.6);
+      }
+      tl.to(label, { opacity: 0, y: -12, duration: 0.2, ease: "expo.in" }, 0.52)
         .to(el, { ...reveal, duration: 0.32, ease: "expo.inOut", transformOrigin: revealOrigin, delay: 0.08 });
     };
 
@@ -69,7 +76,7 @@ export default function PageTransition() {
       className="fixed inset-0 bg-[#0d1e33] scale-y-0 will-change-transform z-[90] flex flex-col items-center justify-center gap-5 pointer-events-none"
       style={{ transformOrigin: "top" }}
     >
-      <img src="/vyden-v-white.svg" alt="" aria-hidden="true" className="h-12 w-auto opacity-70" width="80" height="60" decoding="async" />
+      <img ref={vRef} src="/vyden-v-white.svg" alt="" aria-hidden="true" className="h-12 w-auto opacity-70 will-change-transform" width="80" height="60" decoding="async" />
       <span ref={labelRef} className="font-serif text-4xl md:text-6xl font-light text-white tracking-tight opacity-0">
         VYDEN CO.
       </span>
