@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { Phone } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
@@ -35,6 +35,14 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
 
+  // Hero→next-section choreography: the content drifts up and dissolves while
+  // the three headline lines separate at different rates — one continuous film.
+  const reduceMotion = useReducedMotion();
+  const colY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const colOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const line1Y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -64]);
+  const line3Y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 56]);
+
   return (
     <section id="home" ref={sectionRef} className="relative min-h-[100dvh] flex items-center px-[5%] pt-28 pb-16 overflow-hidden bg-navy-deep">
       {/* Background Elements */}
@@ -61,7 +69,7 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.19fr_0.81fr] gap-8 lg:gap-12 items-center">
-        <div className="max-w-[880px]">
+        <motion.div style={reduceMotion ? undefined : { y: colY, opacity: colOpacity }} className="max-w-[880px]">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,17 +87,21 @@ export default function Hero() {
 
           <VelocityType max={0.045}>
           <h1 className="hero-heading font-serif text-[10vw] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[3.5rem] xl:text-[4.8rem] 2xl:text-[5.6rem] whitespace-nowrap font-light text-white leading-[1.08] tracking-tight mb-6">
-            <span className="block overflow-hidden pb-1">
-              <motion.span className="block" {...lineReveal(0.35)}>We Build Brands.</motion.span>
-            </span>
+            <motion.span style={reduceMotion ? undefined : { y: line1Y }} className="block">
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" {...lineReveal(0.35)}>We Build Brands.</motion.span>
+              </span>
+            </motion.span>
             <span className="block overflow-hidden pb-1">
               <motion.span className="block" {...lineReveal(0.47)}>
                 We Drive <em className="not-italic bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">Growth.</em>
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-2">
-              <motion.span className="block" {...lineReveal(0.59)}>We Shape Futures.</motion.span>
-            </span>
+            <motion.span style={reduceMotion ? undefined : { y: line3Y }} className="block">
+              <span className="block overflow-hidden pb-2">
+                <motion.span className="block" {...lineReveal(0.59)}>We Shape Futures.</motion.span>
+              </span>
+            </motion.span>
           </h1>
           </VelocityType>
 
@@ -129,7 +141,7 @@ export default function Hero() {
 
           <HeroTicker />
 
-        </div>
+        </motion.div>
 
         {/* Vertical Scrolling Carousel */}
         <div className="hidden lg:block relative h-[500px] overflow-hidden">
