@@ -4,6 +4,7 @@ import Story from '../components/Story';
 import BrandDNA from '../components/BrandDNA';
 import ServiceOrbit from '../components/ServiceOrbit';
 import SoftwareTeaser from '../components/SoftwareTeaser';
+import GrowthEngine from '../components/GrowthEngine';
 import ClientStrip from '../components/ClientStrip';
 import GoldDivider from '../components/GoldDivider';
 import ServiceFinder from '../components/ServiceFinder';
@@ -25,6 +26,7 @@ export default function HomePage() {
       <ServiceOrbit />
       <GoldDivider dark />
       <SoftwareTeaser />
+      <GrowthEngine />
       <ClientStrip />
       <ServiceFinder />
       <GoldDivider />
