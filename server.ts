@@ -118,8 +118,9 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  // Dual-stack bind (IPv4 + IPv6) so both `localhost` and `127.0.0.1` resolve.
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT} and http://127.0.0.1:${PORT}`);
   });
 }
 
