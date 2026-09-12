@@ -35,9 +35,17 @@ export default function Vision() {
   useLayoutEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const ctx = gsap.context(() => {
+      // Reduced motion: fully-drawn final state, no scrub choreography.
+      if (reduced) {
+        gsap.set('.v-link, .v-final', { strokeDashoffset: 0 });
+        gsap.set(['.v-node', '.v-stage-1', '.v-cap-1', '.v-cap-2'], { opacity: 1 });
+        gsap.set('.v-stage-2', { opacity: 0.12 });
+        gsap.set('.v-cap-3', { opacity: 1 });
+        return;
+      }
       gsap.timeline({
         scrollTrigger: {
           trigger: stage,
@@ -47,10 +55,10 @@ export default function Vision() {
         },
       })
         .fromTo('.v-stage-1', { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.25 }, 0)
-        .fromTo('.v-link', { pathLength: 0 }, { pathLength: 1, ease: 'none', duration: 0.4 }, 0.12)
+        .fromTo('.v-link', { strokeDashoffset: 1000 }, { strokeDashoffset: 0, ease: 'none', duration: 0.4 }, 0.12)
         .fromTo('.v-node', { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.3, stagger: 0.04 }, 0.2)
         .fromTo('.v-stage-2', { opacity: 1 }, { opacity: 0.12, ease: 'none', duration: 0.2 }, 0.72)
-        .fromTo('.v-final', { pathLength: 0 }, { pathLength: 1, ease: 'none', duration: 0.3 }, 0.68)
+        .fromTo('.v-final', { strokeDashoffset: 1000 }, { strokeDashoffset: 0, ease: 'none', duration: 0.3 }, 0.68)
         .fromTo('.v-cap-1', { opacity: 1 }, { opacity: 0.3, ease: 'none', duration: 0.2 }, 0.1)
         .fromTo('.v-cap-2', { opacity: 0.3 }, { opacity: 1, ease: 'none', duration: 0.2 }, 0.3)
         .fromTo('.v-cap-2', { opacity: 1 }, { opacity: 0.3, ease: 'none', duration: 0.15 }, 0.7)
@@ -120,7 +128,7 @@ export default function Vision() {
               <circle cx="200" cy="150" r="6" fill="#c9a96e" />
               <text x="200" y="195" textAnchor="middle" fill="#c9a96e" fontSize="13" letterSpacing="4" fontFamily="monospace">INDIA</text>
             </g>
-            {/* Stage 2 — the network */}
+            {/* Stage 2 — the network (dash-offset draw; pathLength is read-only in Chromium) */}
             <g className="v-stage-2">
               {netLinks.map(([a, b], i) => (
                 <line
@@ -132,6 +140,8 @@ export default function Vision() {
                   y2={netNodes[b][1]}
                   stroke="#c9a96e"
                   strokeOpacity="0.45"
+                  strokeDasharray="1000"
+                  strokeDashoffset="1000"
                 />
               ))}
               {netNodes.map(([x, y], i) => (
@@ -144,6 +154,8 @@ export default function Vision() {
               d="M110 50 L200 250 L290 50"
               stroke="#e8c98a"
               strokeWidth="3"
+              strokeDasharray="1000"
+              strokeDashoffset="1000"
               style={{ filter: 'drop-shadow(0 0 14px rgba(201,169,110,0.5))' }}
             />
           </svg>
