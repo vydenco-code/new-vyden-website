@@ -5,7 +5,6 @@ import { Link } from '../router';
 import { useInquiry } from '../inquiry';
 import HeroTicker from './HeroTicker';
 import Magnetic from '../motion/Magnetic';
-import LivingV from './LivingV';
 import VelocityType from '../motion/VelocityType';
 
 const services = [
@@ -49,7 +48,6 @@ export default function Hero() {
       <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-navy-deep via-navy-deep to-navy-mid"></div>
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(201,169,110,1)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
-        <LivingV progress={scrollYProgress} />
         {/* Soft floating glows — navy shades only */}
         <motion.div
           aria-hidden="true"
@@ -63,9 +61,6 @@ export default function Hero() {
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <span aria-hidden="true" className="absolute -bottom-10 right-0 font-serif font-bold text-[26vw] lg:text-[19rem] leading-none text-stroke-gold opacity-70 select-none pointer-events-none">
-          VYDEN
-        </span>
       </motion.div>
 
       <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.19fr_0.81fr] gap-8 lg:gap-12 items-center">
