@@ -51,13 +51,13 @@ export default function Hero() {
         {/* Soft floating glows — navy shades only */}
         <motion.div
           aria-hidden="true"
-          className="absolute -top-24 right-[8%] w-[420px] h-[420px] rounded-full bg-navy-light/25 blur-[140px]"
+          className="absolute -top-24 right-[8%] w-[200px] h-[200px] sm:w-[420px] sm:h-[420px] rounded-full bg-navy-light/25 blur-[100px] sm:blur-[140px]"
           animate={{ y: [0, -24, 0], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           aria-hidden="true"
-          className="absolute bottom-[-120px] left-[-80px] w-[380px] h-[380px] rounded-full bg-navy-mid/80 blur-[120px]"
+          className="absolute bottom-[-120px] left-[-80px] w-[180px] h-[180px] sm:w-[380px] sm:h-[380px] rounded-full bg-navy-mid/80 blur-[80px] sm:blur-[120px]"
           animate={{ y: [0, 20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -77,11 +77,11 @@ export default function Hero() {
               transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="w-8 h-[1px] bg-gold origin-left"
             ></motion.div>
-            <span className="text-[0.72rem] font-medium text-gold uppercase tracking-[0.25em]">Vyden Your Horizons</span>
+            <span className="text-sm sm:text-[0.72rem] font-medium text-gold uppercase tracking-[0.25em]">Vyden Your Horizons</span>
           </motion.div>
 
           <VelocityType max={0.045}>
-          <h1 className="hero-heading font-serif text-[10vw] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[3.5rem] xl:text-[4.8rem] 2xl:text-[5.6rem] whitespace-nowrap font-light text-white leading-[1.08] tracking-tight mb-6">
+          <h1 className="hero-heading font-serif text-[9vw] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[3.5rem] xl:text-[4.8rem] 2xl:text-[5.6rem] sm:whitespace-nowrap font-light text-white leading-[1.08] tracking-tight mb-6">
             <motion.span style={reduceMotion ? undefined : { y: line1Y }} className="block">
               <span className="block overflow-hidden pb-1">
                 <motion.span className="block" {...lineReveal(0.35)}>We Build Brands.</motion.span>
@@ -119,7 +119,7 @@ export default function Hero() {
               <button
                 onClick={() => openInquiry()}
                 data-cursor="START"
-                className="group/btn relative overflow-hidden inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-3.5 rounded-sm text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
+                className="group/btn relative overflow-hidden inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-3.5 rounded-sm text-sm sm:text-[0.8rem] font-semibold uppercase tracking-[0.12em] hover:bg-gold-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.3)] transition-all cursor-pointer"
               >
                 <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" aria-hidden="true"></span>
                 <Phone size={18} className="relative z-10" />
@@ -128,7 +128,7 @@ export default function Hero() {
             </Magnetic>
             <Link 
               to="/services" 
-              className="inline-flex items-center gap-2.5 bg-transparent text-white border border-white/25 px-7 py-3.5 rounded-sm text-[0.8rem] font-medium uppercase tracking-[0.12em] hover:border-gold hover:text-gold hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2.5 bg-transparent text-white border border-white/25 px-7 py-3.5 rounded-sm text-sm sm:text-[0.8rem] font-medium uppercase tracking-[0.12em] hover:border-gold hover:text-gold hover:-translate-y-0.5 transition-all"
             >
               Explore Services
             </Link>

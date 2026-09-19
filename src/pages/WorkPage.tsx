@@ -84,13 +84,13 @@ export default function WorkPage() {
         className="bg-navy-mid py-24 overflow-hidden lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
       >
         <div className="px-[5%] mb-10 flex items-end justify-between gap-6">
-          <p className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">
+          <p className="text-sm sm:text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">
             Selected Work <span className="text-white/30 normal-case tracking-normal font-light">— {clients.length} case studies</span>
           </p>
-          <p className="hidden lg:flex items-center gap-2 text-[0.7rem] text-white/40 uppercase tracking-[0.2em]">
+          <p className="hidden lg:flex items-center gap-2 text-sm sm:text-[0.7rem] text-white/40 uppercase tracking-[0.2em]">
             Scroll to explore <MoveRight size={15} className="text-gold" />
           </p>
-          <p className="lg:hidden text-[0.7rem] text-white/40 uppercase tracking-[0.2em]">Swipe →</p>
+          <p className="lg:hidden text-sm sm:text-[0.7rem] text-white/40 uppercase tracking-[0.2em]">Swipe →</p>
         </div>
 
         <div className="overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">

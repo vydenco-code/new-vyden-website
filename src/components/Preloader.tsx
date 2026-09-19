@@ -131,7 +131,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
         transition={{ delay: 1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <p className="font-serif text-white tracking-[0.45em] text-xl pl-2">VYDEN</p>
-        <p className="text-[0.58rem] text-white/50 uppercase tracking-[0.32em] mt-2 pl-1">Digital Growth System</p>
+        <p className="text-[0.72rem] text-white/50 uppercase tracking-[0.32em] mt-2 pl-1">Digital Growth System</p>
       </motion.div>
 
       {/* Counter + progress */}

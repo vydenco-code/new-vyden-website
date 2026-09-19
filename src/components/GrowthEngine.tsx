@@ -39,7 +39,7 @@ export default function GrowthEngine() {
         <div className="lg:sticky lg:top-28 self-start">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="w-6 h-[1px] bg-gold"></div>
-            <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">The System</span>
+            <span className="text-sm sm:text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">The System</span>
           </div>
           <h2 className="font-serif text-3xl md:text-5xl font-normal text-white leading-tight tracking-tight mb-5">
             Growth Is<br />A <em className="italic text-gold not-italic">System.</em>
@@ -50,7 +50,7 @@ export default function GrowthEngine() {
           </p>
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 text-[0.75rem] text-gold uppercase tracking-[0.15em] hover:gap-3.5 transition-all"
+            className="inline-flex items-center gap-2 text-sm sm:text-[0.75rem] text-gold uppercase tracking-[0.15em] hover:gap-3.5 transition-all py-2"
           >
             See the full arsenal <ArrowRight size={15} />
           </Link>
@@ -84,7 +84,7 @@ export default function GrowthEngine() {
                   className="absolute -left-10 md:-left-14 top-1 w-5 h-5 rounded-full border border-gold/60 bg-navy-deep"
                   style={{ transform: 'translateX(-50%)' }}
                 />
-                <p className="font-mono text-[0.6rem] text-gold/70 tracking-[0.3em] mb-1">
+                <p className="font-mono text-[0.72rem] text-gold/70 tracking-[0.3em] mb-1">
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className="font-serif text-2xl md:text-3xl text-white font-normal tracking-wide">{link.name}</h3>

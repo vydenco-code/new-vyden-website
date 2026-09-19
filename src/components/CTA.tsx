@@ -32,7 +32,7 @@ export default function CTA() {
         transition={{ duration: 0.8 }}
         className="relative z-10"
       >
-        <p className="text-[0.7rem] font-semibold text-navy-deep/70 uppercase tracking-[0.3em] mb-5">
+        <p className="text-sm sm:text-[0.7rem] font-semibold text-navy-deep/70 uppercase tracking-[0.3em] mb-5">
           You've seen what we do.
         </p>
         <h2 className="font-serif text-2xl md:text-4xl font-normal text-navy-deep leading-tight tracking-tight mb-8">

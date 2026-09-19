@@ -60,10 +60,10 @@ export default function BrandDNA() {
         <ol className="flex flex-col md:flex-row justify-between gap-7 md:gap-4">
           {nodes.map((node, i) => (
             <li key={node} className="dna-node flex md:flex-col items-center gap-4 md:gap-3 md:text-center md:w-28">
-              <span className="dna-dot w-14 h-14 md:mx-auto rounded-full border border-gold/50 bg-white flex items-center justify-center font-mono text-[0.62rem] text-navy-deep tracking-[0.15em] flex-shrink-0 relative z-10">
+              <span className="dna-dot w-14 h-14 md:mx-auto rounded-full border border-gold/50 bg-white flex items-center justify-center font-mono text-[0.72rem] text-navy-deep tracking-[0.15em] flex-shrink-0 relative z-10">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="text-[0.68rem] font-semibold text-navy-deep uppercase tracking-[0.22em]">
+              <span className="text-sm sm:text-[0.68rem] font-semibold text-navy-deep uppercase tracking-[0.22em]">
                 {node}
               </span>
             </li>
@@ -72,7 +72,7 @@ export default function BrandDNA() {
             <span className="dna-dot w-14 h-14 md:mx-auto rounded-full bg-navy-deep flex items-center justify-center flex-shrink-0 relative z-10">
               <span className="font-serif text-gold text-2xl font-bold leading-none">V</span>
             </span>
-            <span className="text-[0.68rem] font-semibold text-gold uppercase tracking-[0.22em]">Vyden way</span>
+            <span className="text-sm sm:text-[0.68rem] font-semibold text-gold uppercase tracking-[0.22em]">Vyden way</span>
           </li>
         </ol>
       </div>

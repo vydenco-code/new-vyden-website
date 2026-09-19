@@ -14,7 +14,7 @@ export default function StickyCTABar() {
           className="flex flex-col items-center gap-0.5 text-white hover:text-gold transition-colors"
         >
           <Phone size={22} className="text-gold" />
-          <span className="text-[0.55rem] uppercase tracking-widest font-medium">Call</span>
+          <span className="text-[0.65rem] uppercase tracking-widest font-medium">Call</span>
         </a>
         <a
           href={SITE.whatsappUrl}
@@ -23,7 +23,7 @@ export default function StickyCTABar() {
           className="flex flex-col items-center gap-0.5 text-white hover:text-wa-green transition-colors"
         >
           <WhatsAppIcon size={22} className="text-wa-green" />
-          <span className="text-[0.55rem] uppercase tracking-widest font-medium">WhatsApp</span>
+          <span className="text-[0.65rem] uppercase tracking-widest font-medium">WhatsApp</span>
         </a>
         <button
           onClick={() => openInquiry()}
@@ -32,7 +32,7 @@ export default function StickyCTABar() {
           <div className="w-7 h-7 rounded-full bg-gold flex items-center justify-center">
             <span className="text-[0.5rem] font-bold text-navy-deep">?</span>
           </div>
-          <span className="text-[0.55rem] uppercase tracking-widest font-medium">Ask</span>
+          <span className="text-[0.65rem] uppercase tracking-widest font-medium">Ask</span>
         </button>
       </div>
     </div>

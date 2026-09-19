@@ -8,7 +8,7 @@ export default function WhatsAppFloat() {
       href={SITE.whatsappMessageUrl} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="fixed bottom-7 right-7 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_4px_20px_rgba(37,211,102,0.4)] z-[900] transition-all group"
+      className="fixed bottom-20 right-5 md:bottom-7 md:right-7 w-14 h-14 md:w-16 md:h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_4px_20px_rgba(37,211,102,0.4)] z-[900] transition-all group"
       aria-label="Chat on WhatsApp"
       whileHover={{ 
         scale: 1.15,

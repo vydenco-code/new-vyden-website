@@ -21,6 +21,10 @@
   }
   body {
     @apply font-sans bg-off-white text-slate-800 antialiased overflow-x-hidden;
+    padding-bottom: 72px;
+  }
+  @media (min-width: 1024px) {
+    body { padding-bottom: 0; }
   }
   
   /* Custom Scrollbar */

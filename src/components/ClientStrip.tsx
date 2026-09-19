@@ -47,7 +47,7 @@ export default function ClientStrip() {
                 )}
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-20"></div>
               </div>
-              <p className="text-[0.68rem] text-slate-400 uppercase tracking-widest mt-3 text-center group-hover:text-gold transition-colors">{client.tag}</p>
+              <p className="text-sm sm:text-[0.68rem] text-slate-400 uppercase tracking-widest mt-3 text-center group-hover:text-gold transition-colors">{client.tag}</p>
             </Link>
           </RevealMask>
         ))}

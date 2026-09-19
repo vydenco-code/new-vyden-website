@@ -50,7 +50,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-14 mb-16">
         <div className="footer-brand">
           <span className="font-serif text-2xl font-bold text-white tracking-wider block mb-5">Vyden Co.</span>
-          <p className="text-[0.83rem] text-white/40 leading-relaxed font-light mb-7 max-w-md">
+          <p className="text-sm sm:text-[0.83rem] text-white/40 leading-relaxed font-light mb-7 max-w-md">
             Vyden Co. is a <strong className="text-gold font-normal">full-service marketing & software solutions company</strong>, serving ambitious brands worldwide. We build brands, drive performance, and shape futures with digital, traditional and custom software execution.
           </p>
           <div className="flex gap-3">
@@ -60,7 +60,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
                 href={social.href} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 border border-white/10 rounded-sm flex items-center justify-center text-white/50 transition-all hover:border-gold hover:text-gold hover:bg-gold/5"
+                className="w-11 h-11 border border-white/10 rounded-sm flex items-center justify-center text-white/50 transition-all hover:border-gold hover:text-gold hover:bg-gold/5"
                 aria-label={social.label}
               >
                 {social.icon}
@@ -80,7 +80,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
               'Website Chatbots & AI'
             ].map((item) => (
               <li key={item}>
-                <Link to="/services" className="text-[0.8rem] text-white/40 hover:text-gold transition-colors font-light">{item}</Link>
+                <Link to="/services" className="text-sm sm:text-[0.8rem] text-white/40 hover:text-gold transition-colors font-light py-1 inline-block">{item}</Link>
               </li>
             ))}
             <li>
@@ -100,7 +100,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
               { name: 'Contact Us', href: '/contact' },
             ].map((item) => (
               <li key={item.name}>
-                <Link to={item.href} className="text-[0.8rem] text-white/40 hover:text-gold transition-colors font-light">{item.name}</Link>
+                <Link to={item.href} className="text-sm sm:text-[0.8rem] text-white/40 hover:text-gold transition-colors font-light py-1 inline-block">{item.name}</Link>
               </li>
             ))}
           </ul>
@@ -111,7 +111,7 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <Phone size={16} className="text-gold mt-1 flex-shrink-0" />
-              <span className="text-[0.8rem] text-white/40 font-light">{SITE.phoneDisplay}</span>
+              <span className="text-sm sm:text-[0.8rem] text-white/40 font-light">{SITE.phoneDisplay}</span>
             </div>
             <div className="flex items-start gap-3">
               <Mail size={16} className="text-gold mt-1 flex-shrink-0" />

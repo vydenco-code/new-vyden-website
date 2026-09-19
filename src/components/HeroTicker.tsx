@@ -57,7 +57,7 @@ export default function HeroTicker() {
             <div className="font-serif text-3xl sm:text-4xl font-medium text-white leading-none">
               <TickerNumber to={stat.value} suffix={stat.suffix} start={start} />
             </div>
-            <div className="text-[0.6rem] font-medium text-white/50 uppercase tracking-[0.22em] mt-1.5">
+            <div className="text-[0.72rem] font-medium text-white/50 uppercase tracking-[0.22em] mt-1.5">
               {stat.label}
             </div>
           </div>

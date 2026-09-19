@@ -249,7 +249,7 @@ export default function ServiceOrbit() {
           <h2 className="font-serif text-3xl md:text-5xl font-normal text-white leading-tight tracking-tight">
             The Service <em className="italic text-gold not-italic">Orbit.</em>
           </h2>
-          <p className="text-[0.68rem] font-mono text-white/40 uppercase tracking-[0.3em] mt-4">Drag to spin · Hover to inspect</p>
+          <p className="text-sm sm:text-[0.68rem] font-mono text-white/40 uppercase tracking-[0.3em] mt-4">Drag to spin · Hover to inspect</p>
         </div>
 
         {/* Orbit field */}
@@ -293,8 +293,8 @@ export default function ServiceOrbit() {
               data-cursor="EXPLORE"
               className="absolute left-0 top-0 w-[92px] h-[92px] sm:w-[104px] sm:h-[104px] rounded-full bg-navy-mid/85 backdrop-blur-sm border border-white/20 hover:border-gold flex flex-col items-center justify-center gap-1 transition-colors duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-gold will-change-transform"
             >
-              <span className="font-mono text-[0.6rem] text-gold tracking-[0.2em]">{String(i + 1).padStart(2, '0')}</span>
-              <span className="font-sans text-[0.6rem] sm:text-[0.62rem] font-semibold text-white tracking-[0.12em] uppercase leading-tight px-2 text-center">
+              <span className="font-mono text-[0.72rem] text-gold tracking-[0.2em]">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-sans text-[0.68rem] sm:text-[0.72rem] font-semibold text-white tracking-[0.12em] uppercase leading-tight px-2 text-center">
                 {s.short}
               </span>
             </button>
@@ -313,12 +313,12 @@ export default function ServiceOrbit() {
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-mono text-[0.65rem] text-gold tracking-[0.3em] mb-3">0{active + 1} — NOW SHOWING</p>
+              <p className="font-mono text-[0.72rem] text-gold tracking-[0.3em] mb-3">0{active + 1} — NOW SHOWING</p>
               <h3 className="font-serif text-3xl md:text-5xl font-normal text-white leading-tight mb-4">{current.title}</h3>
               <p className="text-[0.95rem] text-white/55 font-light leading-relaxed max-w-xl mx-auto mb-5">{current.description}</p>
               <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-8">
                 {current.details.map((d) => (
-                  <li key={d} className="text-[0.72rem] text-white/45 font-light flex items-center gap-2">
+                  <li key={d} className="text-sm sm:text-[0.72rem] text-white/45 font-light flex items-center gap-2">
                     <span className="text-gold text-[0.6rem]">✦</span> {d.split(' and ')[0].split(',')[0]}
                   </li>
                 ))}
@@ -331,7 +331,7 @@ export default function ServiceOrbit() {
                 >
                   Explore {current.short} <ArrowRight size={15} />
                 </button>
-                <Link to="/services" className="text-[0.75rem] text-white/50 uppercase tracking-[0.15em] hover:text-gold transition-colors">
+                <Link to="/services" className="text-sm sm:text-[0.75rem] text-white/50 uppercase tracking-[0.15em] hover:text-gold transition-colors py-2">
                   All 13 services →
                 </Link>
               </div>

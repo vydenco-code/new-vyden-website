@@ -99,7 +99,7 @@ export default function Story({ staticMode = false }: { staticMode?: boolean }) 
               </svg>
 
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="font-mono text-[0.55rem] text-gold/50 tracking-[0.3em] uppercase">Est. India</p>
+                <p className="font-mono text-[0.72rem] text-gold/50 tracking-[0.3em] uppercase">Est. India</p>
               </div>
             </div>
           </motion.div>

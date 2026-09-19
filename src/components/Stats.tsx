@@ -58,7 +58,7 @@ export default function Stats() {
       <div className="max-w-6xl mx-auto">
         <div className="inline-flex items-center gap-3 mb-4">
           <div className="w-6 h-[1px] bg-gold"></div>
-          <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Proof / Growth</span>
+          <span className="text-sm sm:text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Proof / Growth</span>
         </div>
         <h2 className="font-serif text-3xl md:text-5xl font-normal text-navy-deep leading-tight tracking-tight mb-4">
           Proof, Not <em className="italic text-navy-mid not-italic">Promises.</em>
@@ -66,7 +66,7 @@ export default function Stats() {
         <div className="flex items-center gap-4 mb-14">
           <span className="font-serif text-gold text-2xl font-bold leading-none" aria-hidden="true">V</span>
           <span className="h-[1px] w-24 bg-gold/50" aria-hidden="true"></span>
-          <p className="text-[0.68rem] text-slate-400 uppercase tracking-[0.22em] font-medium">
+          <p className="text-sm sm:text-[0.68rem] text-slate-400 uppercase tracking-[0.22em] font-medium">
             Real figures from our services and client work
           </p>
         </div>
@@ -84,10 +84,10 @@ export default function Stats() {
               <div className="font-serif text-6xl md:text-7xl font-medium text-navy-deep leading-none mb-3">
                 <Counter to={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-[0.7rem] font-semibold text-navy-deep uppercase tracking-[0.22em] mb-2.5">
+              <div className="text-sm sm:text-[0.7rem] font-semibold text-navy-deep uppercase tracking-[0.22em] mb-2.5">
                 {stat.label}
               </div>
-              <p className="text-[0.85rem] text-slate-500 leading-relaxed font-light max-w-[260px]">
+              <p className="text-[0.9rem] sm:text-[0.85rem] text-slate-500 leading-relaxed font-light max-w-[260px]">
                 {stat.text}
               </p>
             </motion.div>
