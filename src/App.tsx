@@ -21,6 +21,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import CustomCursor from './components/CustomCursor';
 import LegalModal from './components/LegalModal';
 import InquiryModal from './components/InquiryModal';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -135,9 +136,11 @@ export default function App() {
           <Navbar />
           
           <main role="main" id="main-content">
-            <Suspense fallback={<PageLoader />}>
-              <Routes />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <Routes />
+              </Suspense>
+            </ErrorBoundary>
           </main>
           
           <Footer onOpenLegal={openLegalModal} />

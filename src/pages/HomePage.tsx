@@ -20,7 +20,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Stats />
-      <Story />
+      <Story staticMode />
       <BrandDNA />
       <ServiceOrbit />
       <SoftwareTeaser />

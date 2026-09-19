@@ -13,8 +13,6 @@ import Spotlight from '../components/Spotlight';
 import { useSpotlight } from '../hooks/useSpotlight';
 import { usePageMeta } from '../hooks/usePageMeta';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function WorkPage() {
   const clients = getPublishedClients();
   const sectionRef = useRef<HTMLElement>(null);
@@ -62,26 +60,6 @@ export default function WorkPage() {
           },
         });
 
-        // Cinematic layer: giant outline titles drift against the rail direction.
-        gsap.utils.toArray<HTMLElement>('.work-card').forEach((card) => {
-          const title = card.querySelector('.work-giant-title');
-          if (!title) return;
-          gsap.fromTo(
-            title,
-            { xPercent: 18 },
-            {
-              xPercent: -18,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: card,
-                containerAnimation: tween,
-                start: 'left right',
-                end: 'right left',
-                scrub: true,
-              },
-            }
-          );
-        });
       }, section);
       return () => ctx.revert();
     });
@@ -215,13 +193,6 @@ function WorkCard({ project, index, onPreview }: { project: Client; index: numbe
       transition={{ duration: 0.5, delay: Math.min(index, 2) * 0.1 }}
       className="work-card group relative w-[82vw] sm:w-[400px] lg:w-[420px] shrink-0 snap-center"
     >
-      <span
-        aria-hidden="true"
-        className="work-giant-title pointer-events-none select-none absolute -top-14 left-0 font-serif font-bold uppercase whitespace-nowrap text-7xl leading-none z-0"
-        style={{ WebkitTextStroke: '1px rgba(255,255,255,0.16)', color: 'transparent' }}
-      >
-        {project.title}
-      </span>
       <Spotlight x={pos.x} y={pos.y} />
       <Link to={`/work/${project.slug}`} data-cursor="VIEW" className="relative z-10 block h-full bg-white/5 rounded-sm overflow-hidden transition-all hover:bg-white/10 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)]">
         <div className="h-48 group-hover:h-60 transition-all duration-500 bg-white relative flex items-center justify-center overflow-hidden">

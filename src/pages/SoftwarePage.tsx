@@ -3,6 +3,8 @@ import { ArrowRight, ClipboardList, Boxes, MessageSquare, CalendarCheck, Table2,
 import { useInquiry } from '../inquiry';
 import PageHeader from '../components/PageHeader';
 import SectionHeader from '../components/SectionHeader';
+import FAQAccordion from '../components/FAQAccordion';
+import { softwareFAQs } from '../data/faqs';
 import { usePageMeta } from '../hooks/usePageMeta';
 
 const tools = [
@@ -146,6 +148,7 @@ export default function SoftwarePage() {
           Discuss Your Project <ArrowRight size={17} />
         </button>
       </section>
+      <FAQAccordion faqs={softwareFAQs} title="Software Questions" />
     </>
   );
 }

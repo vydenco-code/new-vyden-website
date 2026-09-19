@@ -64,3 +64,22 @@ export const generalFAQs: FAQ[] = [
     answer: "Yes — we often collaborate with in-house teams, acting as an extension or providing specialized support where needed."
   },
 ];
+
+export const softwareFAQs: FAQ[] = [
+  {
+    question: "How long does it take to build custom software?",
+    answer: "Most tools launch in 4–8 weeks depending on complexity. We work in stages — you see progress and give feedback at every step."
+  },
+  {
+    question: "Do we need to know coding to use the software?",
+    answer: "Not at all. We build clean, simple interfaces your team can use on day one. Training is included."
+  },
+  {
+    question: "Can the software integrate with our existing tools?",
+    answer: "Yes — we connect to WhatsApp, Google Sheets, CRMs, payment gateways, and whatever else your workflow relies on."
+  },
+  {
+    question: "What if our process changes after the tool is built?",
+    answer: "We build with flexibility in mind. Updates, new features, and workflow changes are supported post-launch."
+  },
+];

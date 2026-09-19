@@ -106,7 +106,7 @@ export default function GrowthEngine() {
               {[175, 140, 100, 60].map((y) => (
                 <line key={y} x1="10" y1={y} x2="550" y2={y} stroke="#ffffff" strokeOpacity="0.07" />
               ))}
-              <motion.g style={reduce ? { opacity: 1, scale: 1 } : { opacity: vOpacity, scale: vScale }} transform-origin="480 60">
+              <motion.g style={reduce ? { opacity: 1, scale: 1, transformOrigin: '480px 60px' } : { opacity: vOpacity, scale: vScale, transformOrigin: '480px 60px' }}>
                 <path d="M440 30 L480 92 L520 30" stroke="#e8c98a" strokeWidth="3" />
               </motion.g>
             </svg>

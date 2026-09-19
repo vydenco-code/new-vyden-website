@@ -1,172 +1,104 @@
-import { useLayoutEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const highlights = [
+const pillars = [
   {
-    title: 'Global Expansion',
-    description: 'Building a brand recognized across continents with world-class digital solutions for businesses of all sizes.'
+    number: '01',
+    title: 'Global Ambition',
+    text: 'Building a brand recognized across continents — world-class digital solutions for businesses of every scale.',
   },
   {
+    number: '02',
     title: 'AI-Powered Innovation',
-    description: 'Leveraging artificial intelligence as a catalyst for transformation — enabling intelligent strategies and optimized campaigns.'
+    text: 'Artificial intelligence as a catalyst — smarter strategies, faster execution, measurable outcomes.',
   },
   {
-    title: 'Sustainable Growth Models',
-    description: 'Creating scalable, cost-efficient marketing ecosystems that deliver measurable results at scale for every client.'
-  }
+    number: '03',
+    title: 'Sustainable Growth',
+    text: 'Scalable, cost-efficient marketing ecosystems that deliver results today and compound tomorrow.',
+  },
 ];
 
-const netNodes: Array<[number, number]> = [
-  [200, 150], [120, 90], [290, 85], [95, 210], [310, 215], [200, 250],
-];
-const netLinks: Array<[number, number]> = [
-  [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 3], [2, 4], [3, 5], [4, 5],
-];
-
-// The vision as a 3-stage system, scrubbed: one point (India) → a connected
-// network → the network resolving into a V. Lightweight SVG, no pin.
+// Clean vision section: large V mark reveal + three pillars. No rough SVGs.
 export default function Vision() {
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const ctx = gsap.context(() => {
-      // Reduced motion: fully-drawn final state, no scrub choreography.
-      if (reduced) {
-        gsap.set('.v-link, .v-final', { strokeDashoffset: 0 });
-        gsap.set(['.v-node', '.v-stage-1', '.v-cap-1', '.v-cap-2'], { opacity: 1 });
-        gsap.set('.v-stage-2', { opacity: 0.12 });
-        gsap.set('.v-cap-3', { opacity: 1 });
-        return;
-      }
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: stage,
-          start: 'top 82%',
-          end: 'bottom 40%',
-          scrub: 0.6,
-        },
-      })
-        .fromTo('.v-stage-1', { opacity: 1 }, { opacity: 0, ease: 'none', duration: 0.25 }, 0)
-        .fromTo('.v-link', { strokeDashoffset: 1000 }, { strokeDashoffset: 0, ease: 'none', duration: 0.4 }, 0.12)
-        .fromTo('.v-node', { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.3, stagger: 0.04 }, 0.2)
-        .fromTo('.v-stage-2', { opacity: 1 }, { opacity: 0.12, ease: 'none', duration: 0.2 }, 0.72)
-        .fromTo('.v-final', { strokeDashoffset: 1000 }, { strokeDashoffset: 0, ease: 'none', duration: 0.3 }, 0.68)
-        .fromTo('.v-cap-1', { opacity: 1 }, { opacity: 0.3, ease: 'none', duration: 0.2 }, 0.1)
-        .fromTo('.v-cap-2', { opacity: 0.3 }, { opacity: 1, ease: 'none', duration: 0.2 }, 0.3)
-        .fromTo('.v-cap-2', { opacity: 1 }, { opacity: 0.3, ease: 'none', duration: 0.15 }, 0.7)
-        .fromTo('.v-cap-3', { opacity: 0.3 }, { opacity: 1, ease: 'none', duration: 0.2 }, 0.75);
-    }, stage);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="vision" className="bg-off-white py-24 px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="flex flex-col"
-      >
-        <div className="inline-flex items-center gap-3 mb-4">
-          <div className="w-6 h-[1px] bg-gold"></div>
-          <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Our Vision</span>
-        </div>
-        <h2 className="font-serif text-3xl md:text-5xl font-normal text-navy-deep leading-tight tracking-tight mb-5">
-          Global Ambition.<br /><em className="italic text-navy-mid not-italic">Limitless Horizon.</em>
-        </h2>
-        <div className="space-y-5 text-[0.98rem] text-slate-600 leading-relaxed font-light mb-9">
-          <p>
-            We are building Vyden Co. into a name ambitious brands trust for marketing that grows and software that fits how they work. We aim to expand our presence across continents, building a brand that represents trust, growth, and forward-thinking strategy on a global scale.
-          </p>
-          <p>
-            By leveraging the power of artificial intelligence, automation, and data-driven systems, we strive to eliminate inefficiencies and create smarter, faster, and more impactful marketing ecosystems for every client we serve.
-          </p>
+    <section id="vision" className="bg-off-white py-28 px-[5%] overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Top: headline + V mark */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-6 h-[1px] bg-gold"></div>
+              <span className="text-[0.7rem] font-medium text-gold uppercase tracking-[0.25em]">Our Vision</span>
+            </div>
+            <h2 className="font-serif text-3xl md:text-5xl font-normal text-navy-deep leading-tight tracking-tight mb-6">
+              Global Ambition.<br /><em className="italic text-navy-mid not-italic">Limitless Horizon.</em>
+            </h2>
+            <div className="space-y-5 text-[0.98rem] text-slate-600 leading-relaxed font-light">
+              <p>
+                We are building Vyden Co. into a name ambitious brands trust for marketing that grows and software that fits how they work. Our reach extends across continents, driven by trust, results, and forward-thinking strategy.
+              </p>
+              <p>
+                By leveraging artificial intelligence, automation, and data-driven systems, we create smarter, faster, and more impactful marketing ecosystems for every client we serve.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Large V mark */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center justify-center"
+          >
+            <div className="relative">
+              {/* Outer ring */}
+              <div className="w-52 h-52 md:w-64 md:h-64 rounded-full border border-navy-deep/10 flex items-center justify-center">
+                {/* Inner ring */}
+                <div className="w-40 h-40 md:w-52 md:h-52 rounded-full border border-navy-deep/5 flex items-center justify-center">
+                  <img
+                    src="/vyden-v-gold.svg"
+                    alt="Vyden Co. Vision"
+                    className="w-20 h-auto md:w-24"
+                    width="96"
+                    height="76"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              {/* Decorative dots */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-2 h-2 rounded-full bg-gold/40" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1 w-1.5 h-1.5 rounded-full bg-gold/30" />
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-1.5 h-1.5 rounded-full bg-gold/30" />
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-1.5 h-1.5 rounded-full bg-gold/30" />
+            </div>
+          </motion.div>
         </div>
 
-        <div className="space-y-4">
-          {highlights.map((item) => (
-            <div key={item.title} className="flex items-start gap-4 p-5 bg-white border-l-[3px] border-gold rounded-r-sm shadow-sm">
-              <div>
-                <h4 className="font-serif text-lg font-semibold text-navy-deep mb-1">{item.title}</h4>
-                <p className="text-[0.83rem] text-slate-500 leading-relaxed font-light">{item.description}</p>
-              </div>
-            </div>
+        {/* Three pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {pillars.map((p, i) => (
+            <motion.div
+              key={p.number}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="relative bg-white border border-slate-100 p-8 rounded-sm hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(13,30,51,0.06)] transition-all group"
+            >
+              <span className="font-mono text-[0.65rem] text-gold/60 tracking-[0.3em] block mb-4">{p.number}</span>
+              <h3 className="font-serif text-xl font-semibold text-navy-deep mb-3 group-hover:text-gold transition-colors">{p.title}</h3>
+              <p className="text-[0.85rem] text-slate-500 leading-relaxed font-light">{p.text}</p>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gold transition-all duration-500 group-hover:w-full" />
+            </motion.div>
           ))}
         </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative"
-      >
-        <div
-          ref={stageRef}
-          className="relative bg-navy-deep rounded-sm shadow-xl overflow-hidden p-6 md:p-8 min-h-[420px] md:min-h-[480px] flex flex-col"
-        >
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(rgba(201,169,110,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(201,169,110,0.6)_1px,transparent_1px)] bg-[size:36px_36px]"></div>
-          </div>
-          <p className="relative font-mono text-[0.62rem] text-gold/80 tracking-[0.3em] mb-2">VYDN / EXPANSION SYSTEM</p>
-
-          <svg viewBox="0 0 400 300" className="relative w-full h-auto flex-grow" fill="none" aria-hidden="true">
-            {/* Stage 1 — one point */}
-            <g className="v-stage-1">
-              <circle cx="200" cy="150" r="26" stroke="#c9a96e" strokeOpacity="0.3" />
-              <circle cx="200" cy="150" r="6" fill="#c9a96e" />
-              <text x="200" y="195" textAnchor="middle" fill="#c9a96e" fontSize="13" letterSpacing="4" fontFamily="monospace">INDIA</text>
-            </g>
-            {/* Stage 2 — the network (dash-offset draw; pathLength is read-only in Chromium) */}
-            <g className="v-stage-2">
-              {netLinks.map(([a, b], i) => (
-                <line
-                  key={i}
-                  className="v-link"
-                  x1={netNodes[a][0]}
-                  y1={netNodes[a][1]}
-                  x2={netNodes[b][0]}
-                  y2={netNodes[b][1]}
-                  stroke="#c9a96e"
-                  strokeOpacity="0.45"
-                  strokeDasharray="1000"
-                  strokeDashoffset="1000"
-                />
-              ))}
-              {netNodes.map(([x, y], i) => (
-                <circle key={i} className="v-node" cx={x} cy={y} r={i === 0 ? 6 : 4} fill={i === 0 ? '#c9a96e' : '#ffffff'} fillOpacity={i === 0 ? 1 : 0.75} />
-              ))}
-            </g>
-            {/* Stage 3 — the V */}
-            <path
-              className="v-final"
-              d="M110 50 L200 250 L290 50"
-              stroke="#e8c98a"
-              strokeWidth="3"
-              strokeDasharray="1000"
-              strokeDashoffset="1000"
-              style={{ filter: 'drop-shadow(0 0 14px rgba(201,169,110,0.5))' }}
-            />
-          </svg>
-
-          <div className="relative flex justify-between font-mono text-[0.6rem] tracking-[0.25em] mt-2">
-            <span className="v-cap-1 text-gold">01 · INDIA ●</span>
-            <span className="v-cap-2 text-white/70">02 · NETWORK</span>
-            <span className="v-cap-3 text-gold">03 · V</span>
-          </div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

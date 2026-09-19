@@ -159,8 +159,7 @@ export default function ServiceFinder() {
     }, 200);
   };
 
-  const moveFocus = (e: KeyboardEvent<HTMLButtonElement>, index: number, total: number) => {
-    const cols = 2;
+  const moveFocus = (e: KeyboardEvent<HTMLButtonElement>, index: number, total: number, cols: number) => {
     let next: number | null = null;
     if (e.key === 'ArrowRight') next = (index + 1) % total;
     else if (e.key === 'ArrowLeft') next = (index - 1 + total) % total;
@@ -194,6 +193,7 @@ export default function ServiceFinder() {
     Icon: typeof Users,
     index: number,
     total: number,
+    cols: number,
     onPick: () => void
   ) => (
     <motion.button
@@ -202,7 +202,7 @@ export default function ServiceFinder() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.07 }}
       onClick={() => pick(key, onPick)}
-      onKeyDown={(e) => moveFocus(e, index, total)}
+      onKeyDown={(e) => moveFocus(e, index, total, cols)}
       className={`group relative text-left p-6 pt-7 transition-all duration-200 cursor-pointer border outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep ${
         flashKey === key
           ? 'bg-gold/25 border-gold scale-[1.02]'
@@ -324,7 +324,7 @@ export default function ServiceFinder() {
                   <h3 className="font-serif text-2xl md:text-3xl text-white mb-8">What should this plan achieve?</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {goals.map((g, i) =>
-                      optionCard(`A-0${i + 1}`, g.key, g.label, g.hint, g.icon, i, goals.length, () => {
+                      optionCard(`A-0${i + 1}`, g.key, g.label, g.hint, g.icon, i, goals.length, 2, () => {
                         setGoal(g.key);
                         setStep(1);
                       })
@@ -340,7 +340,7 @@ export default function ServiceFinder() {
                   <div className="flex flex-wrap gap-2 mb-8">{goalLabel && pickChip(goalLabel, 0, 'Revise your goal')}</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     {businesses.map((b, i) =>
-                      optionCard(`B-0${i + 1}`, b.key, b.label, b.hint, b.icon, i, businesses.length, () => {
+                      optionCard(`B-0${i + 1}`, b.key, b.label, b.hint, b.icon, i, businesses.length, 2, () => {
                         setBusiness(b.key);
                         setStep(2);
                       })
@@ -360,7 +360,7 @@ export default function ServiceFinder() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                     {timelines.map((t, i) =>
-                      optionCard(`C-0${i + 1}`, t.key, t.label, t.hint, t.icon, i, timelines.length, () => {
+                      optionCard(`C-0${i + 1}`, t.key, t.label, t.hint, t.icon, i, timelines.length, 3, () => {
                         setTimeline(t.key);
                         setStep(3);
                       })
@@ -492,17 +492,6 @@ export default function ServiceFinder() {
                     </button>
                   </div>
 
-                  {/* approved stamp slam */}
-                  <motion.div
-                    initial={{ scale: 2.4, opacity: 0, rotate: -18 }}
-                    animate={{ scale: 1, opacity: 1, rotate: -12 }}
-                    transition={{ type: 'spring', stiffness: 320, damping: 17, delay: 0.9 }}
-                    className="pointer-events-none absolute -top-3 right-2 md:right-6 border-[3px] border-gold px-4 py-2 bg-navy-deep/60"
-                    aria-hidden="true"
-                  >
-                    <p className="font-mono text-gold text-sm md:text-base font-bold tracking-[0.25em]">APPROVED</p>
-                    <p className="font-mono text-gold/70 text-[0.55rem] tracking-[0.3em] text-center">VYDEN · {today}</p>
-                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>

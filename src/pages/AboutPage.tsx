@@ -1,6 +1,7 @@
 import Story from '../components/Story';
+import AboutProcess from '../components/AboutProcess';
 import Vision from '../components/Vision';
-import HumanAI from '../components/HumanAI';
+import TeamValues from '../components/TeamValues';
 import CTA from '../components/CTA';
 import PageHeader from '../components/PageHeader';
 import { usePageMeta } from '../hooks/usePageMeta';
@@ -14,9 +15,10 @@ export default function AboutPage() {
         label="About Vyden Co."
         title={<>The People Behind<br /><em className="italic text-gold not-italic">The Results.</em></>}
       />
-      <Story />
+      <Story staticMode />
+      <AboutProcess />
       <Vision />
-      <HumanAI />
+      <TeamValues />
       <CTA />
     </>
   );

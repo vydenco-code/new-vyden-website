@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight, Phone, Mail, MapPin, Globe } from 'lucide-react';
 import { Link } from '../router';
@@ -12,24 +11,6 @@ interface FooterProps {
 export default function Footer({ onOpenLegal }: FooterProps) {
   const openInquiry = useInquiry();
   const currentYear = new Date().getFullYear();
-  const [deepClicks, setDeepClicks] = useState(0);
-  const [deepMode, setDeepMode] = useState(false);
-
-  // Easter egg: five intentional taps on the sign-off wake DEEP MODE briefly.
-  const pokeDeep = () => {
-    if (deepMode) return;
-    const next = deepClicks + 1;
-    setDeepClicks(next);
-    if (next >= 5) {
-      setDeepClicks(0);
-      setDeepMode(true);
-      document.documentElement.classList.add('deep-mode');
-      setTimeout(() => {
-        setDeepMode(false);
-        document.documentElement.classList.remove('deep-mode');
-      }, 4000);
-    }
-  };
 
   const legalLinks = [
     { name: 'Privacy Policy' },
@@ -37,21 +18,6 @@ export default function Footer({ onOpenLegal }: FooterProps) {
     { name: 'Cookie Policy' },
     { name: 'Disclaimer' },
     { name: 'Sitemap' },
-  ];
-
-  const seoKeywords = [
-    'digital marketing agency in Kolkata',
-    'best Kolkata digital marketing agencies',
-    'podcast creation in Kolkata',
-    'graphic designing in Kolkata',
-    'WhatsApp automation in Kolkata',
-    'social media marketing in Kolkata',
-    'meta ads marketing in Kolkata',
-    'Google ads marketing in Kolkata',
-    'traditional marketing agency',
-    'outdoor advertising services',
-    'custom software development',
-    'website development services'
   ];
 
   return (
@@ -176,10 +142,6 @@ export default function Footer({ onOpenLegal }: FooterProps) {
         <div className="order-3 md:order-1 flex items-center h-full">
           <p className="text-[0.75rem] text-white/25 font-light leading-none flex items-center gap-2">
             © {currentYear} Vyden Co. All rights reserved. · India
-            <span className="inline-flex items-center gap-1.5 text-gold/70">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-blink-gold" aria-hidden="true"></span>
-              VYDEN / SYSTEM ONLINE
-            </span>
           </p>
         </div>
         
@@ -199,30 +161,6 @@ export default function Footer({ onOpenLegal }: FooterProps) {
           <span className="text-[0.68rem] text-white/20 tracking-widest flex items-center gap-1.5 uppercase leading-none">
             <span className="text-gold inline-flex items-center justify-center">✦</span> Built with Vision by Vyden Co.
           </span>
-        </div>
-      </div>
-
-      {/* Giant sign-off — five taps wake DEEP MODE */}
-      <div className="max-w-7xl mx-auto overflow-hidden mt-14" aria-hidden="true">
-        <div
-          onClick={pokeDeep}
-          className="font-serif font-bold text-[19vw] lg:text-[12rem] leading-[0.85] text-stroke-gold opacity-60 text-center select-none cursor-pointer"
-        >
-          VYDEN CO.
-        </div>
-        <p className={`text-center font-mono text-[0.62rem] text-gold tracking-[0.35em] mt-3 transition-opacity duration-500 ${deepMode ? 'opacity-100' : 'opacity-0'}`}>
-          VYDEN DEEP MODE — WIREFRAME EDITION
-        </p>
-      </div>
-      
-      {/* Seamless SEO Keywords */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
-        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 opacity-20 hover:opacity-40 transition-opacity duration-500">
-          {seoKeywords.map((keyword, idx) => (
-            <span key={idx} className="text-[0.6rem] text-white uppercase tracking-widest font-light flex items-center">
-              {keyword} {idx < seoKeywords.length - 1 && <span className="ml-4 text-gold/30">|</span>}
-            </span>
-          ))}
         </div>
       </div>
     </footer>

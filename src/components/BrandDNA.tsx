@@ -2,8 +2,6 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const nodes = ['BRAND', 'STRATEGY', 'CONTENT', 'AUDIENCE', 'DATA', 'GROWTH'];
 
 // Compact bridge between Story and Orbit: the six links of every growth

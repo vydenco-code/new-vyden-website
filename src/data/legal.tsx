@@ -20,7 +20,10 @@ function Section({ heading, children }: { heading: string; children: ReactNode }
   );
 }
 
-const LAST_UPDATED = <p className="text-xs text-slate-400">Last Updated: March 29, 2026</p>;
+const LAST_UPDATED_PRIVACY = <p className="text-xs text-slate-400">Last Updated: March 29, 2026</p>;
+const LAST_UPDATED_TERMS = <p className="text-xs text-slate-400">Last Updated: March 29, 2026</p>;
+const LAST_UPDATED_COOKIES = <p className="text-xs text-slate-400">Last Updated: September 20, 2026</p>;
+const LAST_UPDATED_DISCLAIMER = <p className="text-xs text-slate-400">Last Updated: March 29, 2026</p>;
 
 export function getLegalContent(onClose: () => void): Record<string, LegalSection> {
   const social = (key: string) => socialLinks.find((s) => s.key === key);
@@ -30,7 +33,7 @@ export function getLegalContent(onClose: () => void): Record<string, LegalSectio
       title: 'Privacy Policy',
       body: (
         <LegalText>
-          {LAST_UPDATED}
+          {LAST_UPDATED_PRIVACY}
           <p>
             At Vyden Co., we are committed to protecting your privacy. This Privacy Policy explains
             how we collect, use, and safeguard your information when you visit our website or use
@@ -78,7 +81,7 @@ export function getLegalContent(onClose: () => void): Record<string, LegalSectio
       title: 'Terms of Service',
       body: (
         <LegalText>
-          {LAST_UPDATED}
+          {LAST_UPDATED_TERMS}
           <p>
             By accessing or using the services provided by Vyden Co., you agree to be bound by these
             Terms of Service.
@@ -122,7 +125,7 @@ export function getLegalContent(onClose: () => void): Record<string, LegalSectio
       title: 'Cookie Policy',
       body: (
         <LegalText>
-          {LAST_UPDATED}
+          {LAST_UPDATED_COOKIES}
           <p>Vyden Co. uses cookies to enhance your experience on our website.</p>
 
           <Section heading="1. What are Cookies?">
@@ -135,19 +138,20 @@ export function getLegalContent(onClose: () => void): Record<string, LegalSectio
 
           <Section heading="2. Types of Cookies We Use">
             <ul className="list-disc pl-5 space-y-2 mt-2">
-              <li><strong>Essential Cookies:</strong> Necessary for the website to function correctly.</li>
+              <li><strong>Essential Cookies:</strong> Necessary for the website to function correctly. These include session cookies for the inquiry form and smooth-scroll preferences.</li>
               <li>
-                <strong>Analytical Cookies:</strong> Help us understand how visitors interact with our
-                website by collecting and reporting information anonymously.
-              </li>
-              <li>
-                <strong>Marketing Cookies:</strong> Used to track visitors across websites to display
-                relevant and engaging ads.
+                <strong>Functional Cookies:</strong> Remember your preferences such as the exit-intent popup dismissal (stored via localStorage).
               </li>
             </ul>
           </Section>
 
-          <Section heading="3. Managing Cookies">
+          <Section heading="3. What We Do NOT Use">
+            <p>
+              We do not use any analytical cookies (Google Analytics, Plausible, etc.), marketing cookies, advertising pixels, or third-party tracking scripts. Your browsing data is not shared with any third party for analytics or advertising purposes.
+            </p>
+          </Section>
+
+          <Section heading="4. Managing Cookies">
             <p>
               You can choose to disable cookies through your individual browser settings. However,
               please note that some parts of our website may not function properly if you do so.
@@ -160,7 +164,7 @@ export function getLegalContent(onClose: () => void): Record<string, LegalSectio
       title: 'Disclaimer',
       body: (
         <LegalText>
-          {LAST_UPDATED}
+          {LAST_UPDATED_DISCLAIMER}
           <p>The information provided on the Vyden Co. website is for general informational purposes only.</p>
 
           <Section heading="1. No Guarantees">

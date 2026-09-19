@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { ExternalLink, Fingerprint } from 'lucide-react';
+import React from 'react';
+import { ExternalLink, Fingerprint, ChevronRight } from 'lucide-react';
 import { useInquiry } from '../inquiry';
 import { servicesData } from '../data/services';
 import type { Service } from '../data/services';
 import Spotlight from './Spotlight';
 import { useSpotlight } from '../hooks/useSpotlight';
 
+const relatedMap: Record<string, string[]> = {
+  'Social Media Marketing': ['Content Strategy', 'Community Management', 'Social Listening', 'Influencer Outreach'],
+  'Google Business & Local SEO': ['Website SEO Audit', 'Content Marketing', 'Local Citations', 'Review Management'],
+  'Branding & Public Relations': ['Brand Guidelines', 'Media Kit Design', 'Crisis Communication', 'Thought Leadership'],
+  'Podcast Production': ['Podcast Strategy', 'Guest Booking', 'Show Notes & Transcripts', 'Cross-Platform Repurposing'],
+  'WhatsApp Automation & AI': ['CRM Integration', 'Lead Scoring', 'Funnel Automation', 'Multi-Agent Workflows'],
+  'Web & App Development': ['Landing Pages', 'Web Apps', 'API Development', 'Cloud Hosting & DevOps'],
+  'Influencer Marketing': ['Affiliate Programs', 'Brand Ambassadorships', 'Product Seeding', 'Influencer Analytics'],
+  'Graphic Design & Creative': ['Motion Graphics', 'UI/UX Design', 'Presentation Design', 'Annual Report Design'],
+  'Outdoor Advertising': ['Transit Branding', 'Retail Signage', 'Gantry Advertising', 'Van Branding'],
+  'Event Management & Activations': ['Exhibition Stalls', 'Photography & Videography', 'Merchandise', 'Virtual Events'],
+  'E-commerce Management': ['Product Photography', 'Catalog Management', 'Inventory Planning', 'Marketplace SEO'],
+  'Email & SMS Marketing': ['Landing Page Design', 'A/B Testing', 'Deliverability Optimization', 'Newsletter Design'],
+  'Website Chatbots & AI': ['Voice AI Assistants', 'Knowledge Base Setup', 'Multi-Language Bots', 'Analytics Dashboards'],
+};
+
 export default function Services() {
-  const [activeServiceIndex, setActiveServiceIndex] = React.useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
   return (
     <section id="services" className="bg-navy-deep py-24 px-[5%]">
@@ -23,20 +38,20 @@ export default function Services() {
           </h2>
         </div>
         <p className="text-base text-white/50 leading-relaxed max-w-sm font-light">
-          <span className="lg:hidden">Explore our core services. Hold for 0.5 seconds on any card to see detailed offerings and inquire now.</span>
-          <span className="hidden lg:inline">Explore our core services. Match the cursor key with the unlock icon on any card to see detailed offerings and inquire now.</span>
+          <span className="lg:hidden">Tap any card to explore its full scope and inquire.</span>
+          <span className="hidden lg:inline">Hover any card to explore its full scope and services.</span>
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start">
         {servicesData.map((service, index) => (
           <ServiceCard 
             key={service.title} 
             service={service} 
             index={index} 
-            isActive={activeServiceIndex === index}
-            onToggle={() => setActiveServiceIndex(activeServiceIndex === index ? null : index)}
-            onClose={() => setActiveServiceIndex(null)}
+            isActive={activeIndex === index}
+            onToggle={() => setActiveIndex(activeIndex === index ? null : index)}
+            onClose={() => setActiveIndex(null)}
           />
         ))}
       </div>
@@ -50,45 +65,38 @@ interface ServiceCardProps {
   isActive: boolean;
   onToggle: () => void;
   onClose: () => void;
-  key?: string | number;
 }
 
 function ServiceCard({ service, index, isActive, onToggle, onClose }: ServiceCardProps) {
   const openInquiry = useInquiry();
   const { ref, pos, onMouseMove } = useSpotlight<HTMLDivElement>();
-  const scrollRef = React.useRef<HTMLUListElement>(null);
-  const [isUnlocked, setIsUnlocked] = React.useState(false);
   const holdTimerRef = React.useRef<NodeJS.Timeout | null>(null);
-  const justUnlockedRef = React.useRef(false);
+  const closeTimerRef = React.useRef<NodeJS.Timeout | null>(null);
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const related = relatedMap[service.title] || [];
 
   React.useEffect(() => {
     return () => {
-      if (holdTimerRef.current) {
-        clearTimeout(holdTimerRef.current);
-      }
+      if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
 
-  React.useEffect(() => {
-    if (isActive && scrollRef.current) {
-      // Small scroll nudge to show it's scrollable on mobile
-      const el = scrollRef.current;
-      setTimeout(() => {
-        el.scrollTo({ top: 20, behavior: 'smooth' });
-        setTimeout(() => {
-          el.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 500);
-      }, 300);
+  const scheduleClose = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => onClose(), 200);
+  };
+
+  const cancelClose = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
     }
-  }, [isActive]);
+  };
 
   const handleTouchStart = () => {
     holdTimerRef.current = setTimeout(() => {
-      setIsUnlocked(true);
-      justUnlockedRef.current = true;
-      setTimeout(() => {
-        justUnlockedRef.current = false;
-      }, 500);
+      onToggle();
     }, 500);
   };
 
@@ -100,98 +108,98 @@ function ServiceCard({ service, index, isActive, onToggle, onClose }: ServiceCar
   };
 
   const handleClick = () => {
-    if (justUnlockedRef.current) return;
-    if (isUnlocked || isActive) {
-      setIsUnlocked(false);
-      onClose();
-    }
+    onToggle();
   };
 
-  const showDetails = isActive || isUnlocked;
-
   return (
-    <motion.article 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      onClick={handleClick}
-      onMouseMove={onMouseMove}
-      onMouseLeave={() => {
-        setIsUnlocked(false);
-        onClose();
-      }}
-      className={`group relative bg-white/5 border border-white/10 rounded-sm p-9 min-h-[260px] flex flex-col overflow-hidden transition-all hover:border-gold ${showDetails ? 'border-gold -translate-y-1' : ''}`}
-    >
-      {/* Hover/Active Background */}
-      <div className={`absolute inset-0 bg-gradient-to-br from-navy-mid to-navy-light transition-opacity duration-400 z-0 ${showDetails ? 'opacity-100' : 'opacity-0'}`}></div>
-      <div ref={ref} className="absolute inset-0 z-[1] pointer-events-none" aria-hidden="true"></div>
-      <Spotlight x={pos.x} y={pos.y} />
+    <div ref={cardRef} className="relative">
+      <div
+        ref={ref}
+        onMouseMove={onMouseMove}
+        onMouseLeave={() => { if (window.matchMedia('(min-width: 1024px)').matches) scheduleClose(); }}
+        onClick={handleClick}
+        onContextMenu={(e) => e.preventDefault()}
+        className={`group relative rounded-sm transition-all duration-500 ease-out ${
+          isActive
+            ? 'z-30 border-gold bg-gradient-to-br from-navy-mid to-navy-light border shadow-[0_16px_60px_rgba(0,0,0,0.5)]'
+            : 'z-10 border-white/10 bg-white/5 border hover:border-gold/50 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]'
+        }`}
+      >
+        <Spotlight x={pos.x} y={pos.y} />
 
-      {/* Preview Content */}
-      <div className={`relative z-10 flex-grow flex flex-col items-center justify-center text-center transition-all duration-300 ${showDetails ? 'opacity-0 -translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'}`}>
-        <h3 className="font-serif text-xl font-semibold text-white mb-3 leading-tight">{service.title}</h3>
-        <p className="text-[0.82rem] text-white/50 leading-relaxed font-light mb-6">{service.description}</p>
-        
-        {/* Lock Icon */}
-        <div 
-          className="mt-auto flex flex-col items-center justify-center cursor-pointer group/lock select-none"
-          onPointerEnter={(e) => {
-            if (e.pointerType === 'mouse') {
-              setIsUnlocked(true);
-            }
-          }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onTouchCancel={handleTouchEnd}
-          onContextMenu={(e) => e.preventDefault()}
-          style={{ WebkitTouchCallout: 'none' }}
-        >
-          {/* Desktop Unlock Icon */}
-          <div className="hidden lg:flex relative items-center justify-center w-8 h-8 border-2 border-dashed border-white/30 rounded-full transition-all duration-300 group-hover/lock:border-gold group-hover/lock:scale-110">
-            <div className="w-2 h-2 bg-white/30 rounded-full transition-colors duration-300 group-hover/lock:bg-gold"></div>
-          </div>
-          <span className="hidden lg:block text-[0.6rem] text-white/30 uppercase tracking-widest mt-2 transition-colors duration-300 group-hover/lock:text-gold">Unlock</span>
-
-          {/* Mobile Fingerprint Icon */}
-          <div className="lg:hidden flex flex-col items-center justify-center transition-all duration-300 group-hover/lock:text-gold text-white/30">
-            <Fingerprint size={32} strokeWidth={1.5} />
-            <span className="text-[0.6rem] uppercase tracking-widest mt-2">Hold</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Detail Content (Revealed on Hover/Active) */}
-      <div className={`absolute inset-0 p-7 transition-all duration-300 z-20 flex flex-col ${showDetails ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
-        <h3 className="font-serif text-lg font-semibold text-gold mb-3.5 leading-tight">{service.title}</h3>
-        <ul 
-          ref={scrollRef}
-          className="space-y-2 mb-6 overflow-y-auto custom-scrollbar flex-grow"
-        >
-          {service.details.map((detail, i) => (
-            <li key={i} className="text-[0.75rem] text-white/75 flex items-start gap-2 leading-relaxed font-light">
-              <span className="text-gold mt-0.5 flex-shrink-0">—</span>
-              {detail}
-            </li>
-          ))}
-        </ul>
-        {/* Mobile Scroll Indicator */}
-        {isActive && (
-          <div className="lg:hidden flex justify-center mb-2 animate-bounce opacity-50">
-            <div className="w-1 h-4 bg-gold/30 rounded-full"></div>
+        {!isActive && (
+          <div className="relative z-10 flex flex-col items-center justify-center text-center p-9 min-h-[260px]">
+            <h3 className="font-serif text-xl font-semibold text-white mb-3 leading-tight">{service.title}</h3>
+            <p className="text-[0.82rem] text-white/50 leading-relaxed font-light mb-6">{service.description}</p>
+            <div className="mt-auto flex flex-col items-center justify-center select-none">
+              <div
+                onPointerEnter={(e) => {
+                  if (e.pointerType === 'mouse') {
+                    cancelClose();
+                    onToggle();
+                  }
+                }}
+                className="hidden lg:flex relative items-center justify-center w-12 h-12 border-2 border-dashed border-white/30 rounded-full transition-all duration-300 hover:border-gold hover:scale-110 cursor-pointer"
+              >
+                <div className="w-2 h-2 bg-white/30 rounded-full transition-colors duration-300 hover:bg-gold"></div>
+              </div>
+              <span className="hidden lg:block text-[0.6rem] text-white/30 uppercase tracking-widest mt-2">Unlock</span>
+              <div className="lg:hidden flex flex-col items-center justify-center text-white/30">
+                <Fingerprint size={32} strokeWidth={1.5} />
+                <span className="text-[0.6rem] uppercase tracking-widest mt-2">Hold</span>
+              </div>
+            </div>
           </div>
         )}
-        <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            openInquiry(service.title);
-          }}
-          data-cursor="START"
-          className="mt-auto inline-flex items-center justify-center gap-2 bg-gold text-navy-deep py-2.5 rounded-sm text-[0.7rem] font-bold uppercase tracking-widest hover:bg-gold-light transition-colors cursor-pointer"
-        >
-          Inquire Now <ExternalLink size={12} />
-        </button>
+
+        {isActive && (
+          <div className="relative z-10 p-9">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-5 h-[1px] bg-gold/50"></div>
+              <span className="text-[0.6rem] font-medium text-gold uppercase tracking-[0.2em]">Our Offerings</span>
+            </div>
+            <h3 className="font-serif text-xl font-semibold text-gold mb-4 leading-tight">{service.title}</h3>
+            
+            <ul className="space-y-2.5 mb-5">
+              {service.details.map((detail, i) => (
+                <li key={i} className="text-[0.78rem] text-white/70 flex items-start gap-2.5 leading-relaxed font-light">
+                  <span className="text-gold mt-1 flex-shrink-0 text-[0.5rem]">&#9670;</span>
+                  {detail}
+                </li>
+              ))}
+            </ul>
+
+            {related.length > 0 && (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="h-[1px] flex-1 bg-white/10"></div>
+                  <span className="text-[0.58rem] font-medium text-gold/60 uppercase tracking-[0.2em] whitespace-nowrap">What Else We Can Do</span>
+                  <div className="h-[1px] flex-1 bg-white/10"></div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {related.map((item, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1 text-[0.65rem] text-white/45 bg-white/5 border border-white/10 rounded-full px-2.5 py-1 font-light hover:text-gold hover:border-gold/30 transition-colors cursor-default"
+                    >
+                      <ChevronRight size={8} className="text-gold/50" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <button 
+              onClick={(e) => { e.stopPropagation(); openInquiry(service.title); }}
+              data-cursor="START"
+              className="w-full inline-flex items-center justify-center gap-2 bg-gold text-navy-deep py-3 rounded-sm text-[0.72rem] font-bold uppercase tracking-widest hover:bg-gold-light transition-colors cursor-pointer"
+            >
+              Inquire Now <ExternalLink size={12} />
+            </button>
+          </div>
+        )}
       </div>
-    </motion.article>
+    </div>
   );
 }

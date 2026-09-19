@@ -12,12 +12,6 @@
   --color-gold-light: #e8c98a;
   --color-off-white: #f5f3ef;
   --color-wa-green: #25D366;
-
-  @keyframes blink-gold {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-  --animate-blink-gold: blink-gold 0.5s ease-in-out infinite;
 }
 
 @layer base {

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowLeft, Phone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import { Link } from '../router';
 import { useInquiry } from '../inquiry';
 import { getClientBySlug, getPublishedClients } from '../data/clients';
@@ -102,6 +102,46 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
+
+      {/* Prev / Next */}
+      {published.length > 1 && (
+        <section className="bg-white py-12 px-[5%] border-t border-slate-100">
+          <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            {(() => {
+              const prev = published[projectNo - 1];
+              const next = published[projectNo + 1];
+              return (
+                <>
+                  {prev ? (
+                    <Link
+                      to={`/work/${prev.slug}`}
+                      className="group flex items-center gap-3 text-left"
+                    >
+                      <ArrowLeft size={16} className="text-gold transition-transform group-hover:-translate-x-1" />
+                      <div>
+                        <p className="text-[0.65rem] font-mono text-slate-400 uppercase tracking-widest">Previous</p>
+                        <p className="text-sm font-serif text-navy-deep group-hover:text-gold transition-colors">{prev.title}</p>
+                      </div>
+                    </Link>
+                  ) : <span />}
+                  {next ? (
+                    <Link
+                      to={`/work/${next.slug}`}
+                      className="group flex items-center gap-3 text-right"
+                    >
+                      <div>
+                        <p className="text-[0.65rem] font-mono text-slate-400 uppercase tracking-widest">Next</p>
+                        <p className="text-sm font-serif text-navy-deep group-hover:text-gold transition-colors">{next.title}</p>
+                      </div>
+                      <ArrowRight size={16} className="text-gold transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  ) : <span />}
+                </>
+              );
+            })()}
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="bg-navy-deep py-20 px-[5%] text-center">

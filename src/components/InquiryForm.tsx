@@ -2,28 +2,13 @@ import { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { servicesData } from '../data/services';
 
 interface InquiryFormProps {
   defaultService?: string;
 }
 
-const services = [
-  "Social Media Marketing",
-  "Google Business & Local SEO",
-  "Branding & Public Relations",
-  "Podcast Production",
-  "WhatsApp Automation & AI",
-  "Web & App Development",
-  "Custom Internal Software",
-  "Influencer Marketing",
-  "Graphic Design & Creative",
-  "Outdoor Advertising",
-  "Event Management & Activations",
-  "E-commerce Management",
-  "Email & SMS Marketing",
-  "Website Chatbots & AI",
-  "Other"
-];
+const serviceNames = [...servicesData.map((s) => s.title), 'Other'];
 
 export default function InquiryForm({ defaultService = '' }: InquiryFormProps) {
   const [formData, setFormData] = useState({
@@ -75,7 +60,6 @@ export default function InquiryForm({ defaultService = '' }: InquiryFormProps) {
         setStatus('error');
       }
     } catch (error) {
-      console.error('Submission error:', error);
       setStatus('error');
     }
   };
@@ -129,7 +113,7 @@ export default function InquiryForm({ defaultService = '' }: InquiryFormProps) {
             name="contactNumber"
             value={formData.contactNumber}
             onChange={handleChange}
-            placeholder="+91 XXXXX XXXXX"
+            placeholder="+91 98765 43210"
             className="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-3.5 text-sm focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold transition-all"
           />
         </div>
@@ -175,7 +159,7 @@ export default function InquiryForm({ defaultService = '' }: InquiryFormProps) {
             className="w-full bg-slate-50 border border-slate-200 rounded-sm px-4 py-3.5 text-sm focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold transition-all appearance-none pr-10"
           >
             <option value="" disabled>Select a service</option>
-            {services.map(s => (
+            {serviceNames.map(s => (
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
